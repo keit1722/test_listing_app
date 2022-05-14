@@ -33,5 +33,26 @@ class User < ApplicationRecord
             presence: true,
             if: -> { new_record? || changes[:crypted_password] }
 
-  validates :email, uniqueness: true
+  validates :email,
+            uniqueness: true,
+            presence: true,
+            length: {
+              maximum: 255,
+            },
+            format: {
+              with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
+            }
+
+  validates :slug,
+            uniqueness: true,
+            presence: true,
+            length: {
+              maximum: 50,
+            },
+            format: {
+              with: /\A[\w\-]+\z/,
+            }
+
+  validates :first_name, presence: true, length: { maximum: 50 }
+  validates :last_name, presence: true, length: { maximum: 50 }
 end
