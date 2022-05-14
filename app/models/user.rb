@@ -55,4 +55,6 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
+
+  enum role: { general: 1, business: 2, admin: 9 }
 end
