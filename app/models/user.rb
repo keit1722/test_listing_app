@@ -10,6 +10,7 @@
 #  public_uid       :string
 #  role             :integer          default("general"), not null
 #  salt             :string
+#  username         :string           not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
@@ -17,6 +18,7 @@
 #
 #  index_users_on_email       (email) UNIQUE
 #  index_users_on_public_uid  (public_uid) UNIQUE
+#  index_users_on_username    (username) UNIQUE
 #
 class User < ApplicationRecord
   authenticates_with_sorcery!
@@ -45,6 +47,7 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
+  validates :username, presence: true, length: { maximum: 50 }, uniqueness: true
 
   enum role: { general: 1, business: 2, admin: 9 }
 end
