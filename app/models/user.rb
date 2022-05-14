@@ -7,16 +7,16 @@
 #  email            :string           not null
 #  first_name       :string           not null
 #  last_name        :string           not null
-#  role             :integer          default(1), not null
+#  public_uid       :string
+#  role             :integer          default("general"), not null
 #  salt             :string
-#  slug             :string           not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
 # Indexes
 #
-#  index_users_on_email  (email) UNIQUE
-#  index_users_on_slug   (slug) UNIQUE
+#  index_users_on_email       (email) UNIQUE
+#  index_users_on_public_uid  (public_uid) UNIQUE
 #
 class User < ApplicationRecord
   authenticates_with_sorcery!
@@ -41,16 +41,6 @@ class User < ApplicationRecord
             },
             format: {
               with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
-            }
-
-  validates :slug,
-            uniqueness: true,
-            presence: true,
-            length: {
-              maximum: 50,
-            },
-            format: {
-              with: /\A[\w\-]+\z/,
             }
 
   validates :first_name, presence: true, length: { maximum: 50 }
