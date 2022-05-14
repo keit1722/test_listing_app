@@ -20,6 +20,8 @@ AllCops:
     - 'lib/tasks/auto_annotate_models.rake'
     - 'config/**/*'
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
 Style/AsciiComments:
   Enabled: false
 Style/ClassAndModuleChildren:
