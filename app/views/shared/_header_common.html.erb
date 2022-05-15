@@ -133,7 +133,7 @@
   <% if logged_in? %>
     <!-- User Menu -->
     <div class="user-menu">
-      <div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>ログイン中</div>
+      <div class="user-name"><span><%= image_tag 'blank-profile-picture.png', alt: "" %></span>ログイン中</div>
       <ul>
         <li>
           <%= link_to mypage_profile_path do %>
