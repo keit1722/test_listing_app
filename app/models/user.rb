@@ -25,6 +25,8 @@ class User < ApplicationRecord
 
   generate_public_uid
 
+  before_save { self.email = email.downcase }
+
   validates :password,
             length: {
               minimum: 3,
