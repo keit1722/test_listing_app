@@ -23,6 +23,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  generate_public_uid
+
   validates :password,
             length: {
               minimum: 3,
