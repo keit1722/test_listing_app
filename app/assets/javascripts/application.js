@@ -1,3 +1,4 @@
+//= require rails-ujs
 //=require "jquery-3.6.0.min.js"
 //=require "jquery-migrate-3.3.2.min.js"
 //=require "mmenu.min.js"
