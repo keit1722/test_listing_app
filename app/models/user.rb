@@ -54,4 +54,8 @@ class User < ApplicationRecord
   validates :username, presence: true, length: { maximum: 50 }, uniqueness: true
 
   enum role: { general: 1, business: 2, admin: 9 }
+
+  def to_param
+    public_uid
+  end
 end
