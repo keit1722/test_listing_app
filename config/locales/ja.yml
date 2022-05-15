@@ -1,5 +1,13 @@
 ja:
   activerecord:
     models:
+      user: 'ユーザー'
     attributes:
+      user:
+        last_name: '名字'
+        first_name: '名前'
+        email: 'メールアドレス'
+        username: 'ユーザーネーム'
+        password: 'パスワード'
+        password_confirmation: 'パスワード確認'
   attributes:
