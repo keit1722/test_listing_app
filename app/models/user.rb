@@ -23,7 +23,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
-  generate_public_uid
+  generate_public_uid generator:
+                        PublicUid::Generators::HexStringSecureRandom.new(20)
 
   before_save { self.email = email.downcase }
 
