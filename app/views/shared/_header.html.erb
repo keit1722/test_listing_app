@@ -143,8 +143,9 @@
       <!-- Right Side Content / End -->
       <div class="right-side">
         <div class="header-widget">
-          <a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"><i class="sl sl-icon-login"></i> Sign In</a>
-          <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>
+          <%= link_to signup_path, class: "sign-in" do %>
+            <i class="sl sl-icon-user-follow"></i> ユーザー登録</a>
+          <% end %>
         </div>
       </div>
       <!-- Right Side Content / End -->
