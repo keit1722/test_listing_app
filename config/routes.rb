@@ -12,4 +12,6 @@ Rails.application.routes.draw do
     patch 'profile', to: 'users#update'
     delete 'profile', to: 'users#destroy'
   end
+
+  resources :organizations
 end
