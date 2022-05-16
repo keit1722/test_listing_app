@@ -23,4 +23,8 @@ class Organization < ApplicationRecord
   validates :address, length: { maximum: 100 }, presence: true
   validates :phone, numericality: true, length: { in: 10..11 }, presence: true
   validates :slug, length: { maximum: 30 }, uniqueness: true, presence: true
+
+  def to_param
+    slug
+  end
 end
