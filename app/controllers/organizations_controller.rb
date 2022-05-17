@@ -2,6 +2,8 @@ class OrganizationsController < ApplicationController
   before_action :require_login
   before_action :only_business
 
+  layout 'mypage'
+
   def index
     @organizations = current_user.organizations
   end
