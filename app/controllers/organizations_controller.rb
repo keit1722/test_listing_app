@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :require_login
+  before_action :only_business
 
   def index
     @organizations = current_user.organizations
@@ -51,5 +52,9 @@ class OrganizationsController < ApplicationController
 
   def organization_edit_params
     params.require(:organization).permit(:name, :address, :phone)
+  end
+
+  def only_business
+    redirect_to root_path unless current_user.business?
   end
 end
