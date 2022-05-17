@@ -28,6 +28,7 @@ gem 'annotate'
 gem 'ridgepole'
 gem 'sorcery'
 gem 'public_uid'
+gem 'draper'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
