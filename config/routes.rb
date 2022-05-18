@@ -8,9 +8,9 @@ Rails.application.routes.draw do
 
   namespace :mypage do
     get 'profile', to: 'users#show'
-    get 'profile/edit', to: 'users#edit'
     patch 'profile', to: 'users#update'
     delete 'profile', to: 'users#destroy'
+    get 'profile/edit', to: 'users#edit'
   end
 
   resources :organizations, param: :slug
