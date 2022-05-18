@@ -10,4 +10,9 @@ ja:
         username: 'ユーザーネーム'
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
+      organization:
+        name: 組織名
+        address: 住所
+        phone: 電話番号
+        slug: URL末尾
   attributes:
