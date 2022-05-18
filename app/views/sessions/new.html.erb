@@ -16,26 +16,7 @@
 
   <!-- Titlebar
 ================================================== -->
-  <div id="titlebar" class="gradient">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-
-          <h2><i class="sl sl-icon-login"></i> ログイン</h2>
-
-          <!-- Breadcrumbs -->
-          <nav id="breadcrumbs">
-            <ul>
-              <li><a href="#">ホーム</a></li>
-              <li>ログイン</li>
-            </ul>
-          </nav>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <%= render 'shared/breadcrumbs', { title: "ログイン" } %>
 
   <!-- Content
 ================================================== -->
