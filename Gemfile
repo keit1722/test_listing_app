@@ -28,6 +28,7 @@ gem 'annotate'
 gem 'ridgepole'
 gem 'sorcery'
 gem 'public_uid'
+gem 'draper'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -55,6 +56,7 @@ group :development do
   gem "binding_of_caller"
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'bullet'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

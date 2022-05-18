@@ -16,26 +16,7 @@
 
   <!-- Titlebar
 ================================================== -->
-  <div id="titlebar" class="gradient">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-
-          <h2><i class="sl sl-icon-user-follow"></i> 新規ユーザー登録</h2>
-
-          <!-- Breadcrumbs -->
-          <nav id="breadcrumbs">
-            <ul>
-              <li><a href="#">ホーム</a></li>
-              <li>新規ユーザー登録</li>
-            </ul>
-          </nav>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <%= render 'shared/breadcrumbs', { title: "新規ユーザー登録" } %>
 
   <!-- Content
 ================================================== -->
@@ -79,7 +60,7 @@
 
               <!-- Row -->
               <div class="row with-forms margin-bottom-20">
-                <!-- Slug -->
+                <!-- Username -->
                 <div class="col-md-12">
                   <h5><%= f.label :username %></h5>
                   <p>他のユーザーの目に触れる箇所になります。
