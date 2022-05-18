@@ -28,7 +28,7 @@ class OrganizationsController < ApplicationController
 
   def update
     @organization = current_user.organizations.find_by!(slug: params[:slug])
-    if @organization.update(organization_edit_paramas)
+    if @organization.update(organization_edit_params)
       redirect_to organization_path, success: '組織の情報を更新しました'
     else
       flash.now[:error] = '組織の情報を更新できませんでした'
