@@ -1,0 +1,48 @@
+<%= render 'shared/breadcrumbs_mypage', { title: "組織情報詳細" } %>
+
+<div class="row">
+
+  <!-- Profile -->
+  <div class="col-md-12">
+    <div class="dashboard-list-box margin-top-0">
+      <div class="dashboard-list-box-static">
+        <!-- table -->
+        <table class="basic-table">
+          <tbody>
+
+            <tr>
+              <td data-label="項目"><%= Organization.human_attribute_name("name") %></td>
+              <td data-label="内容"><%= @organization.name %></td>
+            </tr>
+            <tr>
+              <td data-label="項目"><%= Organization.human_attribute_name("address") %></td>
+              <td data-label="内容"><%= @organization.address %></td>
+            </tr>
+            <tr>
+              <td data-label="項目"><%= Organization.human_attribute_name("phone") %></td>
+              <td data-label="内容"><%= @organization.phone %></td>
+            </tr>
+            <tr>
+              <td data-label="項目"><%= Organization.human_attribute_name("slug") %></td>
+              <td data-label="内容"><%= @organization.slug %></td>
+            </tr>
+            <% unless @organization.users.size == 0 %>
+              <tr>
+                <td data-label="項目">所属ユーザー</td>
+                <td data-label="内容">
+                  <ul class="bg-transparent">
+                    <% @organization.users.each do |user| %>
+                      <li class="padding-top-0 padding-bottom-0 padding-right-0 padding-left-0 bg-transparent border-bottom-none"><%= user.decorate.full_name %></li>
+                    <% end %>
+                  </ul>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <%= link_to "編集", edit_organization_path, class: "button margin-top-15" %>
+        <%= link_to "この組織を削除", organization_path, method: :delete, data: { confirm: "組織を削除すると復旧はできません。よろしいですか？" }, class: "border button" %>
+      </div>
+    </div>
+  </div>

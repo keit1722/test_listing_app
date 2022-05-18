@@ -28,6 +28,9 @@ class User < ApplicationRecord
 
   before_save { self.email = email.downcase }
 
+  has_many :organization_users, dependent: :destroy
+  has_many :organizations, through: :organization_users
+
   validates :password,
             length: {
               minimum: 3
