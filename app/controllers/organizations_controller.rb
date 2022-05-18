@@ -9,11 +9,11 @@ class OrganizationsController < ApplicationController
   end
 
   def new
-    @organization = current_user.organizations.build
+    @organization = Organization.new
   end
 
   def create
-    @organization = current_user.organizations.new(organization_new_params)
+    @organization = Organization.new(organization_create_params)
     if @organization.save
       redirect_to organizations_path, success: '組織を作成しました'
     else
@@ -28,7 +28,7 @@ class OrganizationsController < ApplicationController
 
   def update
     @organization = current_user.organizations.find_by!(slug: params[:slug])
-    if @organization.update(organization_edit_params)
+    if @organization.update(organization_update_params)
       redirect_to organization_path, success: '組織の情報を更新しました'
     else
       flash.now[:error] = '組織の情報を更新できませんでした'
@@ -48,11 +48,14 @@ class OrganizationsController < ApplicationController
 
   private
 
-  def organization_new_params
-    params.require(:organization).permit(:name, :address, :phone, :slug)
+  def organization_create_params
+    params
+      .require(:organization)
+      .permit(:name, :address, :phone, :slug)
+      .merge(user_ids: current_user.id)
   end
 
-  def organization_edit_params
+  def organization_update_params
     params.require(:organization).permit(:name, :address, :phone)
   end
 
