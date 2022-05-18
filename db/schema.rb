@@ -36,6 +36,21 @@ ActiveRecord::Schema.define(version: 2022_05_14_234233) do
     t.index ["slug"], name: "index_organizations_on_slug", unique: true
   end
 
+  create_table "restaurants", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address", null: false
+    t.float "lat", null: false
+    t.float "lng", null: false
+    t.string "slug", null: false
+    t.text "description", null: false
+    t.bigint "organization_id"
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.index ["name"], name: "index_restaurants_on_name", unique: true
+    t.index ["organization_id"], name: "index_restaurants_on_organization_id"
+    t.index ["slug"], name: "index_restaurants_on_slug", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -54,4 +69,5 @@ ActiveRecord::Schema.define(version: 2022_05_14_234233) do
 
   add_foreign_key "organization_users", "organizations"
   add_foreign_key "organization_users", "users"
+  add_foreign_key "restaurants", "organizations"
 end
