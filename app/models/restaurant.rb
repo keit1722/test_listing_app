@@ -40,4 +40,8 @@ class Restaurant < ApplicationRecord
               with: /\A[a-z0-9\-]+\z/,
             }
   validates :description, length: { maximum: 10_000 }, presence: true
+
+  def to_param
+    slug
+  end
 end
