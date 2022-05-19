@@ -1,0 +1,105 @@
+<!-- Titlebar -->
+<div id="titlebar">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>飲食店情報編集ページ</h2>
+      <!-- Breadcrumbs -->
+      <nav id="breadcrumbs">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Dashboard</a></li>
+          <li>飲食店情報編集ページ</li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <%= form_with model: @restaurant, url: organization_restaurant_path do |f| %>
+      <div id="add-listing">
+        <%= render 'shared/error_messages', model: f.object %>
+        <!-- Section -->
+        <div class="add-listing-section padding-top-25">
+
+          <!-- Row -->
+          <div class="row with-forms">
+            <!-- Name -->
+            <div class="col-md-12">
+              <h5><%= f.label :name %></h5>
+              <%= f.text_field :name %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms">
+            <!-- Address -->
+            <div class="col-md-12">
+              <h5><%= f.label :address %></h5>
+              <%= f.text_field :address %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms">
+            <!-- Address -->
+            <div class="col-md-12">
+              <h5><%= f.label :description %></h5>
+              <%= f.text_area :description %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms">
+            <div class="col-md-12">
+              <h5>位置情報</h5>
+              <p>正確な地図を作成するために、以下のマップをクリックしてお店の正確な位置にピンを置いてください。<br>
+              マップを移動させたり拡大していただくことが可能です。</p>
+              <!-- Map -->
+              <div id="map-location-registration" class="margin-bottom-25"></div>
+              <%= f.hidden_field :lat %>
+              <%= f.hidden_field :lng %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms margin-bottom-20">
+            <!-- Images -->
+            <div class="col-md-12">
+              <h5><%= f.label :images %></h5>
+              <%= f.label :images, class: "uploader-conteiner" do %>
+                <div class="uploader-inner">
+                  <i class="sl sl-icon-plus"></i>ここをクリックして画像をアッsプロードしてください
+                </div>
+                <%= f.file_field :images,multiple: true, class: "dropzone dz-clickable", onchange: "previewImage(this)" %>
+              <% end %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms margin-bottom-20">
+            <!-- Images preview -->
+            <div class="col-md-12">
+              <div id="preview">
+                <% @restaurant.images.each do |image| %>
+                  <%= image_tag image.variant(resize: '300x200').processed %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+        </div>
+        <!-- Section / End -->
+
+        <%= f.submit nil, class: "button margin-top-40" %>
+
+      </div>
+    <% end %>
+  </div>
