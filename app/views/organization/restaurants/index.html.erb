@@ -1,0 +1,31 @@
+<!-- Titlebar -->
+<div id="titlebar">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>登録した飲食店</h2>
+      <!-- Breadcrumbs -->
+      <nav id="breadcrumbs">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Dashboard</a></li>
+          <li>登録した飲食店</li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <!-- Listings -->
+  <div class="col-lg-12 col-md-12">
+    <div class="dashboard-list-box margin-top-0">
+      <% if @restaurants.size == 0 %>
+        <h4>登録した飲食店はありません</h4>
+      <% else %>
+        <ul>
+          <%= render @restaurants %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
