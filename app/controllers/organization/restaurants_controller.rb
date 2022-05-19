@@ -1,5 +1,5 @@
 class Organization::RestaurantsController < ApplicationController
-  layout 'mypage'
+  layout :determine_layout
 
   def index
     @restaurants =
@@ -82,5 +82,9 @@ class Organization::RestaurantsController < ApplicationController
     params
       .require(:restaurant)
       .permit(:name, :lat, :lng, :description, :address)
+  end
+
+  def determine_layout
+    action_name == 'index' ? 'mypage' : 'mypage_maps'
   end
 end
