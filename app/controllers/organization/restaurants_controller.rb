@@ -75,13 +75,13 @@ class Organization::RestaurantsController < ApplicationController
   def restaurant_create_params
     params
       .require(:restaurant)
-      .permit(:name, :lat, :lng, :slug, :description, :address)
+      .permit(:name, :lat, :lng, :slug, :description, :address, images: [])
   end
 
   def restaurant_update_params
     params
       .require(:restaurant)
-      .permit(:name, :lat, :lng, :description, :address)
+      .permit(:name, :lat, :lng, :description, :address, images: [])
   end
 
   def determine_layout
