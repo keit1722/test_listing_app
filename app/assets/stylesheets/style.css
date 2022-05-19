@@ -21119,3 +21119,9 @@ body .category-box-btn:hover {
 .border-bottom-none {
   border-bottom: none !important;
 }
+
+#map-location-registration,
+#map-location-display {
+  height: 400px;
+  width: 100%;
+}
