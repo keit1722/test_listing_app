@@ -64,6 +64,23 @@ ActiveRecord::Schema.define(version: 2022_05_19_041819) do
     t.index ["slug"], name: "index_organizations_on_slug", unique: true
   end
 
+  create_table "restaurant_categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.index ["name"], name: "index_restaurant_categories_on_name", unique: true
+  end
+
+  create_table "restaurant_category_mappings", force: :cascade do |t|
+    t.bigint "restaurant_id"
+    t.bigint "restaurant_category_id"
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.index ["restaurant_category_id"], name: "index_restaurant_category_mappings_on_restaurant_category_id"
+    t.index ["restaurant_id", "restaurant_category_id"], name: "index_restaurant_category_mappings_on_id_and_category_id", unique: true
+    t.index ["restaurant_id"], name: "index_restaurant_category_mappings_on_restaurant_id"
+  end
+
   create_table "restaurants", force: :cascade do |t|
     t.string "name", null: false
     t.string "address", null: false
@@ -99,5 +116,7 @@ ActiveRecord::Schema.define(version: 2022_05_19_041819) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "organization_users", "organizations"
   add_foreign_key "organization_users", "users"
+  add_foreign_key "restaurant_category_mappings", "restaurant_categories"
+  add_foreign_key "restaurant_category_mappings", "restaurants"
   add_foreign_key "restaurants", "organizations"
 end
