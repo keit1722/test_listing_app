@@ -28,6 +28,9 @@ class Restaurant < ApplicationRecord
 
   has_many_attached :images
 
+  has_many :restaurant_category_mappings, dependent: :destroy
+  has_many :restaurant_categories, through: :restaurant_category_mappings
+
   validates :name, length: { maximum: 100 }, uniqueness: true, presence: true
   validates :address, length: { maximum: 100 }, presence: true
   validates :lat, presence: true
