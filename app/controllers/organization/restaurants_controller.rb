@@ -27,6 +27,7 @@ class Organization::RestaurantsController < ApplicationController
         .find_by!(slug: params[:organization_slug])
         .restaurants
         .build
+    @restaurant_categories = RestaurantCategory.all
   end
 
   def create
@@ -36,6 +37,8 @@ class Organization::RestaurantsController < ApplicationController
         .find_by!(slug: params[:organization_slug])
         .restaurants
         .build(restaurant_create_params)
+
+    @restaurant_categories = RestaurantCategory.all
     if @restaurant.save
       redirect_to organization_restaurants_path, success: '登録しました'
     else
@@ -52,6 +55,7 @@ class Organization::RestaurantsController < ApplicationController
         .restaurants
         .with_attached_images
         .find_by(slug: params[:slug])
+    @restaurant_categories = RestaurantCategory.all
   end
 
   def update
@@ -61,6 +65,8 @@ class Organization::RestaurantsController < ApplicationController
         .find_by!(slug: params[:organization_slug])
         .restaurants
         .find_by!(slug: params[:slug])
+    @restaurant_categories = RestaurantCategory.all
+
     if @restaurant.update(restaurant_update_params)
       redirect_to organization_restaurant_path(
                     @restaurant.organization,
@@ -78,13 +84,30 @@ class Organization::RestaurantsController < ApplicationController
   def restaurant_create_params
     params
       .require(:restaurant)
-      .permit(:name, :lat, :lng, :slug, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :slug,
+        :description,
+        :address,
+        images: [],
+        restaurant_category_ids: [],
+      )
   end
 
   def restaurant_update_params
     params
       .require(:restaurant)
-      .permit(:name, :lat, :lng, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :description,
+        :address,
+        images: [],
+        restaurant_category_ids: [],
+      )
   end
 
   def determine_layout

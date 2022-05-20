@@ -20,6 +20,12 @@
                 <td data-label="内容"><%= @restaurant.address %></td>
               </tr>
               <tr>
+                <td data-label="項目">カテゴリー</td>
+                <td data-label="内容">
+                  <%= @restaurant.decorate.arranged_categories %>
+                </td>
+              </tr>
+              <tr>
                 <td data-label="項目">URL</td>
                 <td data-label="内容"><%= link_to nil, restaurant_url(@restaurant) %></td>
               </tr>

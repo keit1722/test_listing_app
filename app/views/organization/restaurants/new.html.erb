@@ -91,6 +91,19 @@
           </div>
           <!-- Row / End -->
 
+          <!-- Row -->
+          <div class="row with-forms margin-bottom-20">
+            <!-- Restaurant category -->
+            <div class="col-md-12">
+            <h5>カテゴリー</h5>
+            <p>お店のカテゴリーを選択してください。<br>
+            複数選択できます。</p>
+
+            <%= f.collection_select :restaurant_category_ids, @restaurant_categories, :id, :name, {prompt: ""}, {class: "chosen-select", multiple: true, data: {placeholder: "ここをクリックしてカテゴリーを選択"}} %>
+
+            </div>
+          </div>
+          <!-- Row / End -->
 
         </div>
         <!-- Section / End -->
