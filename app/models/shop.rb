@@ -51,6 +51,7 @@ class Shop < ApplicationRecord
               max: 5,
             },
             content_type: %i[png jpg jpeg]
+  validates :shop_category_ids, presence: true
 
   def to_param
     slug

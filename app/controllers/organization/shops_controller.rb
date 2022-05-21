@@ -27,6 +27,7 @@ class Organization::ShopsController < Organization::BaseController
         .find_by!(slug: params[:organization_slug])
         .shops
         .build
+    @shop_categories = ShopCategory.all
   end
 
   def create
@@ -36,6 +37,8 @@ class Organization::ShopsController < Organization::BaseController
         .find_by!(slug: params[:organization_slug])
         .shops
         .build(shop_create_params)
+    @shop_categories = ShopCategory.all
+
     if @shop.save
       redirect_to organization_shops_path, success: '登録しました'
     else
@@ -52,6 +55,7 @@ class Organization::ShopsController < Organization::BaseController
         .shops
         .with_attached_images
         .find_by(slug: params[:slug])
+    @shop_categories = ShopCategory.all
   end
 
   def update
@@ -61,6 +65,8 @@ class Organization::ShopsController < Organization::BaseController
         .find_by!(slug: params[:organization_slug])
         .shops
         .find_by!(slug: params[:slug])
+    @shop_categories = ShopCategory.all
+
     if @shop.update(shop_update_params)
       redirect_to organization_shop_path(@shop.organization, @shop),
                   success: '情報を更新しました'
@@ -86,12 +92,29 @@ class Organization::ShopsController < Organization::BaseController
   def shop_create_params
     params
       .require(:shop)
-      .permit(:name, :lat, :lng, :slug, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :slug,
+        :description,
+        :address,
+        images: [],
+        shop_category_ids: [],
+      )
   end
 
   def shop_update_params
     params
       .require(:shop)
-      .permit(:name, :lat, :lng, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :description,
+        :address,
+        images: [],
+        shop_category_ids: [],
+      )
   end
 end
