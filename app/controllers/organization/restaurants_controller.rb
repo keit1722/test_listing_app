@@ -7,6 +7,8 @@ class Organization::RestaurantsController < ApplicationController
         .organizations
         .find_by!(slug: params[:organization_slug])
         .restaurants
+        .page(params[:page])
+        .per(20)
         .with_attached_images
   end
 

@@ -6,7 +6,8 @@ class RestaurantsController < ApplicationController
       Restaurant
         .with_attached_images
         .includes(:restaurant_categories)
-        .all
+        .page(params[:page])
+        .per(20)
         .order(created_at: :desc)
   end
 
