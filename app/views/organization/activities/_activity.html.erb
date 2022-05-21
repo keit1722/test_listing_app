@@ -1,0 +1,17 @@
+<li>
+  <div class="list-box-listing">
+    <div class="list-box-listing-img">
+      <% if activity.images.attached? %>
+        <%= link_to image_tag(activity.images.first), organization_activity_path(activity.organization, activity) %>
+      <% end %>
+    </div>
+    <div class="list-box-listing-content">
+      <div class="inner">
+        <h3><%= link_to activity.name, organization_activity_path(activity.organization, activity) %></h3>
+        <span><%= activity.address %></span>
+      </div>
+    </div>
+  </div>
+  <div class="buttons-to-right">
+  </div>
+</li>

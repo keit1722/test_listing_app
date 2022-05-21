@@ -1,0 +1,72 @@
+<div class="fs-container">
+
+  <div class="fs-inner-container content">
+    <div class="fs-content">
+
+      <!-- Search -->
+      <section class="search">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Row With Forms -->
+            <div class="row with-forms">
+            </div>
+            <!-- Row With Forms / End -->
+          </div>
+        </div>
+
+      </section>
+      <!-- Search / End -->
+
+      <section class="listings-container margin-top-30">
+        <!-- Sorting / Layout Switcher -->
+        <div class="row fs-switcher">
+          <div class="col-md-6">
+          </div>
+        </div>
+
+        <!-- Listings -->
+        <div class="row fs-listings">
+          <%= render @activities %>
+        </div>
+        <!-- Listings Container / End -->
+
+        <!-- Pagination Container -->
+        <div class="row fs-listings">
+          <div class="col-md-12">
+
+            <!-- Pagination -->
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12">
+
+                <!-- Pagination -->
+                <div class="pagination-container margin-top-15 margin-bottom-40">
+                  <%= paginate @activities %>
+                </div>
+
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- Pagination / End -->
+
+            <!-- Copyrights -->
+            <div class="copyrights margin-top-0"><%= render 'shared/copyright_text' %></div>
+
+          </div>
+        </div>
+        <!-- Pagination Container / End -->
+      </section>
+
+    </div>
+  </div>
+  <div class="fs-inner-container map-fixed">
+
+    <!-- Map -->
+    <div id="map-container">
+      <div id="map" data-map-zoom="11" data-map-scroll="true">
+        <!-- map goes here -->
+      </div>
+    </div>
+
+  </div>
+</div>
