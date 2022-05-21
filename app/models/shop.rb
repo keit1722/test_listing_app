@@ -30,6 +30,14 @@ class Shop < ApplicationRecord
   validates :address, length: { maximum: 100 }, presence: true
   validates :lat, presence: true
   validates :lng, presence: true
-  validates :slug, length: { maximum: 100 }, uniqueness: true, presence: true
+  validates :slug,
+            length: {
+              maximum: 100,
+            },
+            uniqueness: true,
+            presence: true,
+            format: {
+              with: /\A[a-z0-9\-]+\z/,
+            }
   validates :description, length: { maximum: 10_000 }, presence: true
 end
