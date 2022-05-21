@@ -1,5 +1,5 @@
-class Organization::ShopsController < ApplicationController
-  layout 'mypage'
+class Organization::ShopsController < Organization::BaseController
+  layout :determine_layout
 
   def index
     @shops =
