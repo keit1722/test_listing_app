@@ -18,10 +18,12 @@ Rails.application.routes.draw do
       resources :restaurants, param: :slug
       resources :shops, param: :slug
       resources :hotels, param: :slug
+      resources :activities, param: :slug
     end
   end
 
   resources :restaurants, param: :slug, only: %i[index show]
   resources :shops, param: :slug, only: %i[index show]
   resources :hotels, param: :slug, only: %i[index show]
+  resources :activities, param: :slug, only: %i[index show]
 end
