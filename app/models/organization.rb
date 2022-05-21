@@ -20,6 +20,7 @@ class Organization < ApplicationRecord
   has_many :users, through: :organization_users
   has_many :restaurants, dependent: :destroy
   has_many :shops, dependent: :destroy
+  has_many :hotels, dependent: :destroy
 
   validates :name, length: { maximum: 100 }, uniqueness: true, presence: true
   validates :address, length: { maximum: 100 }, presence: true

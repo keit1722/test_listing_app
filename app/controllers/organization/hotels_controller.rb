@@ -1,48 +1,46 @@
-class Organization::ShopsController < Organization::BaseController
+class Organization::HotelsController < Organization::BaseController
   layout :determine_layout
 
   def index
-    @shops =
+    @hotels =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .shops
+        .hotels
         .page(params[:page])
         .per(20)
         .with_attached_images
   end
 
   def show
-    @shop =
+    @hotel =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .shops
+        .hotels
         .with_attached_images
         .find_by!(slug: params[:slug])
   end
 
   def new
-    @shop =
+    @hotel =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .shops
+        .hotels
         .build
-    @shop_categories = ShopCategory.all
   end
 
   def create
-    @shop =
+    @hotel =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .shops
-        .build(shop_create_params)
+        .hotels
+        .build(hotel_create_params)
 
-    @shop_categories = ShopCategory.all
-    if @shop.save
-      redirect_to organization_shops_path, success: '登録しました'
+    if @hotel.save
+      redirect_to organization_hotels_path, success: '登録しました'
     else
       flash.now[:error] = '登録に失敗しました'
       render :new
@@ -50,27 +48,25 @@ class Organization::ShopsController < Organization::BaseController
   end
 
   def edit
-    @shop =
+    @hotel =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .shops
+        .hotels
         .with_attached_images
         .find_by(slug: params[:slug])
-    @shop_categories = ShopCategory.all
   end
 
   def update
-    @shop =
+    @hotel =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .shops
+        .hotels
         .find_by!(slug: params[:slug])
-    @shop_categories = ShopCategory.all
 
-    if @shop.update(shop_update_params)
-      redirect_to organization_shop_path(@shop.organization, @shop),
+    if @hotel.update(hotel_update_params)
+      redirect_to organization_hotel_path(@hotel.organization, @hotel),
                   success: '情報を更新しました'
     else
       flash.now[:error] = '情報の更新に失敗しました'
@@ -79,44 +75,27 @@ class Organization::ShopsController < Organization::BaseController
   end
 
   def destroy
-    @shop =
+    @hotel =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .shops
+        .hotels
         .find_by(slug: params[:slug])
-    @shop.destroy!
-    redirect_to organization_shops_path, success: '削除しました'
+    @hotel.destroy!
+    redirect_to organization_hotels_path, success: '削除しました'
   end
 
   private
 
-  def shop_create_params
+  def hotel_create_params
     params
-      .require(:shop)
-      .permit(
-        :name,
-        :lat,
-        :lng,
-        :slug,
-        :description,
-        :address,
-        images: [],
-        shop_category_ids: [],
-      )
+      .require(:hotel)
+      .permit(:name, :lat, :lng, :slug, :description, :address, images: [])
   end
 
-  def shop_update_params
+  def hotel_update_params
     params
-      .require(:shop)
-      .permit(
-        :name,
-        :lat,
-        :lng,
-        :description,
-        :address,
-        images: [],
-        shop_category_ids: [],
-      )
+      .require(:hotel)
+      .permit(:name, :lat, :lng, :description, :address, images: [])
   end
 end
