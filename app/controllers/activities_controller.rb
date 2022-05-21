@@ -3,7 +3,7 @@ class ActivitiesController < ApplicationController
 
   def index
     @activities =
-      Hotel
+      Activity
         .with_attached_images
         .page(params[:page])
         .per(20)
