@@ -7,6 +7,7 @@ class Organization::ShopsController < Organization::BaseController
         .organizations
         .find_by!(slug: params[:organization_slug])
         .shops
+        .with_attached_images
   end
 
   def show
@@ -15,6 +16,7 @@ class Organization::ShopsController < Organization::BaseController
         .organizations
         .find_by!(slug: params[:organization_slug])
         .shops
+        .with_attached_images
         .find_by!(slug: params[:slug])
   end
 
@@ -48,6 +50,7 @@ class Organization::ShopsController < Organization::BaseController
         .organizations
         .find_by!(slug: params[:organization_slug])
         .shops
+        .with_attached_images
         .find_by(slug: params[:slug])
   end
 
