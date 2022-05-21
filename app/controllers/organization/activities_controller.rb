@@ -74,6 +74,17 @@ class Organization::ActivitiesController < Organization::BaseController
     end
   end
 
+  def destroy
+    @activity =
+      current_user
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .activitys
+        .find_by(slug: params[:slug])
+    @activity.destroy!
+    redirect_to organization_activities_path, success: '削除しました'
+  end
+
   private
 
   def activity_create_params
