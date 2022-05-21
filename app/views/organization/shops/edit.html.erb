@@ -1,8 +1,8 @@
-<%= render 'shared/breadcrumbs_mypage', { title: "飲食店情報編集ページ" } %>
+<%= render 'shared/breadcrumbs_mypage', { title: "ショップ情報編集ページ" } %>
 
 <div class="row">
   <div class="col-lg-12">
-    <%= form_with model: @restaurant, url: organization_restaurant_path do |f| %>
+    <%= form_with model: @shop, url: organization_shop_path do |f| %>
       <div id="add-listing">
         <%= render 'shared/error_messages', model: f.object %>
         <!-- Section -->
@@ -39,7 +39,7 @@
           <!-- Row / End -->
 
           <!-- Row -->
-          <div class="row with-forms" id="map-section" data-model="restaurant">
+          <div class="row with-forms" id="map-section" data-model="shop">
             <div class="col-md-12">
               <h5>位置情報</h5>
               <p>正確な地図を作成するために、以下のマップをクリックしてお店の正確な位置にピンを置いてください。<br>
@@ -61,7 +61,7 @@
                 <div class="uploader-inner">
                   <i class="sl sl-icon-plus"></i>ここをクリックして画像をアッsプロードしてください
                 </div>
-                <%= f.file_field :images,multiple: true, class: "dropzone dz-clickable", onchange: "previewImage(this)" %>
+                <%= f.file_field :images, multiple: true, class: "dropzone dz-clickable", onchange: "previewImage(this)" %>
               <% end %>
             </div>
           </div>
@@ -72,7 +72,7 @@
             <!-- Images preview -->
             <div class="col-md-12">
               <div id="preview">
-                <% @restaurant.images.each do |image| %>
+                <% @shop.images.each do |image| %>
                   <%= image_tag image.variant(resize: '300x200').processed %>
                 <% end %>
               </div>
@@ -82,13 +82,13 @@
 
           <!-- Row -->
           <div class="row with-forms margin-bottom-20">
-            <!-- Restaurant category -->
+            <!-- Shop category -->
             <div class="col-md-12">
             <h5>カテゴリー</h5>
             <p>お店のカテゴリーを選択してください。<br>
             複数選択できます。</p>
 
-            <%= f.collection_select :restaurant_category_ids, @restaurant_categories, :id, :name, {prompt: ""}, {class: "chosen-select", multiple: true, data: {placeholder: "ここをクリックしてカテゴリーを選択"}} %>
+            <%= f.collection_select :shop_category_ids, @shop_categories, :id, :name, {prompt: ""}, {class: "chosen-select", multiple: true, data: {placeholder: "ここをクリックしてカテゴリーを選択"}} %>
 
             </div>
           </div>

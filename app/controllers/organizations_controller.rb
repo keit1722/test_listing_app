@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :require_login
-  before_action :only_business, except: [:new, :create]
+  before_action :only_business, except: %i[new create]
 
   layout 'mypage'
 
@@ -57,9 +57,5 @@ class OrganizationsController < ApplicationController
 
   def organization_update_params
     params.require(:organization).permit(:name, :address, :phone)
-  end
-
-  def only_business
-    redirect_to root_path unless current_user.business?
   end
 end
