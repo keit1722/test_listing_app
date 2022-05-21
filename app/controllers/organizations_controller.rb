@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :require_login
-  before_action :only_business, except: %i[new create]
+  before_action :only_business, except: [:new, :create]
 
   layout 'mypage'
 

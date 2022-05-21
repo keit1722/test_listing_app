@@ -4,11 +4,11 @@ class RestaurantsController < ApplicationController
   def index
     @restaurants =
       Restaurant
-        .with_attached_images
-        .includes(:restaurant_categories)
-        .page(params[:page])
-        .per(20)
-        .order(created_at: :desc)
+      .with_attached_images
+      .includes(:restaurant_categories)
+      .page(params[:page])
+      .per(20)
+      .order(created_at: :desc)
   end
 
   def show
