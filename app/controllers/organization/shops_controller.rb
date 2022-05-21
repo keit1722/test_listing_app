@@ -83,10 +83,12 @@ class Organization::ShopsController < Organization::BaseController
   def shop_create_params
     params
       .require(:shop)
-      .permit(:name, :lat, :lng, :slug, :description, :address)
+      .permit(:name, :lat, :lng, :slug, :description, :address, images: [])
   end
 
   def shop_update_params
-    params.require(:shop).permit(:name, :lat, :lng, :description, :address)
+    params
+      .require(:shop)
+      .permit(:name, :lat, :lng, :description, :address, images: [])
   end
 end
