@@ -1,5 +1,5 @@
 class Organization::RestaurantsController < Organization::BaseController
-  layout :determine_layout
+  layout :determine_mypage_layout
 
   def index
     @restaurants =

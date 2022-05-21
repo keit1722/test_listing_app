@@ -43,6 +43,21 @@ ActiveRecord::Schema.define(version: 2022_05_19_041819) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "activities", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address", null: false
+    t.float "lat", null: false
+    t.float "lng", null: false
+    t.string "slug", null: false
+    t.text "description", null: false
+    t.bigint "organization_id"
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.index ["name"], name: "index_activities_on_name", unique: true
+    t.index ["organization_id"], name: "index_activities_on_organization_id"
+    t.index ["slug"], name: "index_activities_on_slug", unique: true
+  end
+
   create_table "hotels", force: :cascade do |t|
     t.string "name", null: false
     t.string "address", null: false
@@ -161,6 +176,7 @@ ActiveRecord::Schema.define(version: 2022_05_19_041819) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "activities", "organizations"
   add_foreign_key "hotels", "organizations"
   add_foreign_key "organization_users", "organizations"
   add_foreign_key "organization_users", "users"

@@ -1,9 +1,9 @@
-class HotelsController < ApplicationController
+class ActivitiesController < ApplicationController
   layout :determine_layout
 
   def index
-    @hotels =
-      Hotel
+    @activities =
+      Activity
         .with_attached_images
         .page(params[:page])
         .per(20)
@@ -11,6 +11,6 @@ class HotelsController < ApplicationController
   end
 
   def show
-    @hotel = Hotel.with_attached_images.find_by(slug: params[:slug])
+    @activity = Activity.with_attached_images.find_by(slug: params[:slug])
   end
 end

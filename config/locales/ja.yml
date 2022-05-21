@@ -46,4 +46,12 @@ ja:
         slug: URL末尾
         description: 宿泊施設の紹介
         images: 画像
+      activity:
+        name: 名前
+        address: 住所
+        lng: 緯度
+        lat: 経度
+        slug: URL末尾
+        description: アクティビティの紹介
+        images: 画像
   attributes:
