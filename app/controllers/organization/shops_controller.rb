@@ -1,48 +1,46 @@
-class Organization::RestaurantsController < Organization::BaseController
+class Organization::ShopsController < Organization::BaseController
   layout :determine_layout
 
   def index
-    @restaurants =
+    @shops =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .restaurants
-        .page(params[:page])
-        .per(20)
+        .shops
         .with_attached_images
   end
 
   def show
-    @restaurant =
+    @shop =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .restaurants
+        .shops
         .with_attached_images
         .find_by!(slug: params[:slug])
   end
 
   def new
-    @restaurant =
+    @shop =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .restaurants
+        .shops
         .build
-    @restaurant_categories = RestaurantCategory.all
+    @shop_categories = ShopCategory.all
   end
 
   def create
-    @restaurant =
+    @shop =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .restaurants
-        .build(restaurant_create_params)
+        .shops
+        .build(shop_create_params)
+    @shop_categories = ShopCategory.all
 
-    @restaurant_categories = RestaurantCategory.all
-    if @restaurant.save
-      redirect_to organization_restaurants_path, success: '登録しました'
+    if @shop.save
+      redirect_to organization_shops_path, success: '登録しました'
     else
       flash.now[:error] = '登録に失敗しました'
       render :new
@@ -50,30 +48,27 @@ class Organization::RestaurantsController < Organization::BaseController
   end
 
   def edit
-    @restaurant =
+    @shop =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .restaurants
+        .shops
         .with_attached_images
         .find_by(slug: params[:slug])
-    @restaurant_categories = RestaurantCategory.all
+    @shop_categories = ShopCategory.all
   end
 
   def update
-    @restaurant =
+    @shop =
       current_user
         .organizations
         .find_by!(slug: params[:organization_slug])
-        .restaurants
+        .shops
         .find_by!(slug: params[:slug])
-    @restaurant_categories = RestaurantCategory.all
+    @shop_categories = ShopCategory.all
 
-    if @restaurant.update(restaurant_update_params)
-      redirect_to organization_restaurant_path(
-                    @restaurant.organization,
-                    @restaurant,
-                  ),
+    if @shop.update(shop_update_params)
+      redirect_to organization_shop_path(@shop.organization, @shop),
                   success: '情報を更新しました'
     else
       flash.now[:error] = '情報の更新に失敗しました'
@@ -81,11 +76,22 @@ class Organization::RestaurantsController < Organization::BaseController
     end
   end
 
+  def destroy
+    @shop =
+      current_user
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .shops
+        .find_by(slug: params[:slug])
+    @shop.destroy!
+    redirect_to organization_shops_path, success: '削除しました'
+  end
+
   private
 
-  def restaurant_create_params
+  def shop_create_params
     params
-      .require(:restaurant)
+      .require(:shop)
       .permit(
         :name,
         :lat,
@@ -94,13 +100,13 @@ class Organization::RestaurantsController < Organization::BaseController
         :description,
         :address,
         images: [],
-        restaurant_category_ids: [],
+        shop_category_ids: [],
       )
   end
 
-  def restaurant_update_params
+  def shop_update_params
     params
-      .require(:restaurant)
+      .require(:shop)
       .permit(
         :name,
         :lat,
@@ -108,7 +114,7 @@ class Organization::RestaurantsController < Organization::BaseController
         :description,
         :address,
         images: [],
-        restaurant_category_ids: [],
+        shop_category_ids: [],
       )
   end
 end

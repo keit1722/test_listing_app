@@ -1,13 +1,15 @@
 let marker;
 let lat;
 let lng;
+
 function initMap() {
   const location = { lat: 36.71301262566997, lng: 137.87261375590265 };
   const mapSetting = { targetId: "map-location-registration", zoom: 13 };
-
+  
   if (document.getElementById("map-location-registration")) {
-    lat = document.getElementById("restaurant_lat").value;
-    lng = document.getElementById("restaurant_lng").value;
+    const model = document.getElementById("map-section").dataset.model
+    lat = document.getElementById(`${model}_lat`).value;
+    lng = document.getElementById(`${model}_lng`).value;
 
     if (lat && lng) {
       location.lat = convertIntoFloat(lat);
@@ -51,8 +53,9 @@ function initMap() {
 }
 
 function getPosition(lat_lng, map) {
-  document.getElementById("restaurant_lat").value = lat_lng.lat();
-  document.getElementById("restaurant_lng").value = lat_lng.lng();
+  const model = document.getElementById("map-section").dataset.model
+  document.getElementById(`${model}_lat`).value = lat_lng.lat();
+  document.getElementById(`${model}_lng`).value = lat_lng.lng();
 
   map.panTo(lat_lng);
 

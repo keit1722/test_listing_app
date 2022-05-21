@@ -1,0 +1,16 @@
+<%= render 'shared/breadcrumbs_mypage', { title: "登録したショップ" } %>
+
+<div class="row">
+
+  <!-- Listings -->
+  <div class="col-lg-12 col-md-12">
+    <div class="dashboard-list-box margin-top-0">
+      <% if @shops.size == 0 %>
+        <h4>登録したショップはありません</h4>
+      <% else %>
+        <ul>
+          <%= render @shops %>
+        </ul>
+      <% end %>
+    </div>
+  </div>

@@ -1,0 +1,24 @@
+<div class="col-lg-12 col-md-12">
+  <div class="listing-item-container list-layout" data-marker-id="<%= shop_counter + 1 %>" data-latitude="<%= shop.lat %>" data-longitude="<%= shop.lng %>">
+    <%= link_to shop_path(shop), class: "listing-item" do %>
+
+      <!-- Image -->
+      <div class="listing-item-image">
+        <% if shop.images.attached? %>
+         <%= image_tag shop.images.first, class: "listing-image" %>
+        <% end %>
+        <span class="tag listing-category"><%= shop.shop_categories.map{ |shop_category| shop_category.name }.join("/") %></span>
+      </div>
+
+      <!-- Content -->
+      <div class="listing-item-content">
+
+        <div class="listing-item-inner">
+          <h3 class="listing-name"><%= shop.name %></h3>
+          <span class="listing-address"><%= shop.address %></span>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+</div>

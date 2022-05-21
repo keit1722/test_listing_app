@@ -1,0 +1,19 @@
+<li>
+  <div class="list-box-listing">
+    <div class="list-box-listing-img">
+      <% if shop.images.attached? %>
+        <%= link_to image_tag(shop.images.first), organization_shop_path(shop.organization, shop) %>
+      <% end %>
+    </div>
+    <div class="list-box-listing-content">
+      <div class="inner">
+        <h3><%= link_to shop.name, organization_shop_path(shop.organization, shop) %></h3>
+        <span><%= shop.address %></span>
+        <div class="star-rating" data-rating="3.5">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="buttons-to-right">
+  </div>
+</li>
