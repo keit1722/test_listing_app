@@ -2,7 +2,13 @@ class ShopsController < ApplicationController
   layout :determine_layout
 
   def index
-    @shops = Shop.all.order(created_at: :desc)
+    @shops =
+      Shop
+        .with_attached_images
+        .includes(:shop_categories)
+        .page(params[:page])
+        .per(20)
+        .order(created_at: :desc)
   end
 
   def show
