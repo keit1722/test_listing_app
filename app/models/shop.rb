@@ -28,6 +28,9 @@ class Shop < ApplicationRecord
 
   has_many_attached :images
 
+  has_many :shop_category_mappings, dependent: :destroy
+  has_many :shop_categories, through: :shop_category_mappings
+
   validates :name, length: { maximum: 100 }, uniqueness: true, presence: true
   validates :address, length: { maximum: 100 }, presence: true
   validates :lat, presence: true
