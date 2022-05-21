@@ -1,0 +1,22 @@
+<li>
+  <div class="list-box-listing">
+    <div class="list-box-listing-img">
+      <% if hotel.images.attached? %>
+        <%= link_to image_tag(hotel.images.first), organization_hotel_path(hotel.organization, hotel) %>
+      <% end %>
+    </div>
+    <div class="list-box-listing-content">
+      <div class="inner">
+        <h3><%= link_to hotel.name, organization_hotel_path(hotel.organization, hotel) %></h3>
+        <span><%= hotel.address %></span>
+        <div class="star-rating" data-rating="3.5">
+          <div class="rating-counter">(12 reviews)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="buttons-to-right">
+    <a href="#" class="button gray"><i class="sl sl-icon-note"></i> Edit</a>
+    <a href="#" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
+  </div>
+</li>
