@@ -1,0 +1,22 @@
+<%= render 'shared/breadcrumbs_mypage', { title: "登録したアクティビティ" } %>
+
+<div class="row">
+
+  <!-- Listings -->
+  <div class="col-lg-12 col-md-12">
+    <div class="dashboard-list-box margin-top-0">
+      <% if @activities.size == 0 %>
+        <h4>登録したアクティビティはありません</h4>
+      <% else %>
+        <ul>
+          <%= render @activities %>
+        </ul>
+      <% end %>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="pagination-container margin-top-30 margin-bottom-0">
+      <%= paginate @activities %>
+    </div>
+
+  </div> 
