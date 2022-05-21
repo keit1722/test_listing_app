@@ -17,9 +17,11 @@ Rails.application.routes.draw do
     scope module: :organization do
       resources :restaurants, param: :slug
       resources :shops, param: :slug
+      resources :hotels, param: :slug
     end
   end
 
   resources :restaurants, param: :slug, only: %i[index show]
   resources :shops, param: :slug, only: %i[index show]
+  resources :hotels, param: :slug, only: %i[index show]
 end

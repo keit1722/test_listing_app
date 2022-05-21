@@ -1,0 +1,17 @@
+<li>
+  <div class="list-box-listing">
+    <div class="list-box-listing-img">
+      <% if hotel.images.attached? %>
+        <%= link_to image_tag(hotel.images.first), organization_hotel_path(hotel.organization, hotel) %>
+      <% end %>
+    </div>
+    <div class="list-box-listing-content">
+      <div class="inner">
+        <h3><%= link_to hotel.name, organization_hotel_path(hotel.organization, hotel) %></h3>
+        <span><%= hotel.address %></span>
+      </div>
+    </div>
+  </div>
+  <div class="buttons-to-right">
+  </div>
+</li>
