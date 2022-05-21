@@ -74,6 +74,17 @@ class Organization::HotelsController < Organization::BaseController
     end
   end
 
+  def destroy
+    @hotel =
+      current_user
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .hotels
+        .find_by(slug: params[:slug])
+    @hotel.destroy!
+    redirect_to organization_hotels_path, success: '削除しました'
+  end
+
   private
 
   def hotel_create_params

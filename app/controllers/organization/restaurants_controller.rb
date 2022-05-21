@@ -81,6 +81,17 @@ class Organization::RestaurantsController < Organization::BaseController
     end
   end
 
+  def destroy
+    @restaurant =
+      current_user
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .restaurants
+        .find_by(slug: params[:slug])
+    @restaurant.destroy!
+    redirect_to organization_restaurants_path, success: '削除しました'
+  end
+
   private
 
   def restaurant_create_params

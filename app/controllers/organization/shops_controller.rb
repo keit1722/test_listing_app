@@ -78,6 +78,17 @@ class Organization::ShopsController < Organization::BaseController
     end
   end
 
+  def destroy
+    @shop =
+      current_user
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .shops
+        .find_by(slug: params[:slug])
+    @shop.destroy!
+    redirect_to organization_shops_path, success: '削除しました'
+  end
+
   private
 
   def shop_create_params
