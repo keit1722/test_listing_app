@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
   def only_business
     redirect_to root_path unless current_user.business?
   end
+
+  def determine_layout
+    action_name == 'index' ? 'listing_index' : 'listing_single'
+  end
 end
