@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ListingApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+  </head>
+
+  <body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container">
+
+      <!-- Header -->
+      <div id="header" class="not-sticky">
+        <div class="container">
+
+          <%= render 'shared/header' %>
+
+        </div>
+      </div>
+      <!-- Header / End -->
+
+    </header>
+
+      <div class="clearfix"></div>
+      <!-- Header Container / End -->
+
+        <%= yield %>
+
+
+      <!-- Footer
+      ================================================== -->
+      <div id="footer" class="margin-top-15">
+        <!-- Main -->
+        <%= render 'shared/footer' %>
+      </div>
+      <!-- Footer / End -->
+
+      <!-- Back To Top Button -->
+      <div id="backtotop"><a href="#"></a></div>
+
+      <!-- Booking Sticky Footer -->
+      <div class="booking-sticky-footer">
+        <div class="container">
+          <div class="bsf-left">
+            <h4>Starting from $29</h4>
+            <div class="star-rating" data-rating="5">
+              <div class="rating-counter"></div>
+            </div>
+          </div>
+          <div class="bsf-right">
+            <a href="#booking-widget-anchor" class="button">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Wrapper / End -->
+
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'maps-location' %>
+    <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY" async></script>
+  </body>
+</html>

@@ -10,15 +10,15 @@
         <div class="messages-headline">
           <h4>所属している組織はありません</h4>
         </div>
+      <% else %>
+        <div class="messages-inbox">
+
+          <ul>
+            <%= render @organizations %>
+          </ul>
+
+        </div>
       <% end %>
-
-      <div class="messages-inbox">
-
-        <ul>
-          <%= render @organizations %>
-        </ul>
-
-      </div>
     </div>
 
   </div>

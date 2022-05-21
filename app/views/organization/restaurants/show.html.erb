@@ -1,0 +1,75 @@
+<%= render 'shared/breadcrumbs_mypage', { title: "飲食店詳細" } %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div id="add-listing">
+      <!-- Section -->
+      <div class="add-listing-section padding-top-40">
+
+        <!-- Row -->
+        <div class="row with-forms margin-bottom-20">
+          <!-- Table-->
+          <table class="basic-table">
+            <tbody>
+              <tr>
+                <td data-label="項目"><%= Restaurant.human_attribute_name("name") %></td>
+                <td data-label="内容"><%= @restaurant.name %></td>
+              </tr>
+              <tr>
+                <td data-label="項目"><%= Restaurant.human_attribute_name("address") %></td>
+                <td data-label="内容"><%= @restaurant.address %></td>
+              </tr>
+              <tr>
+                <td data-label="項目">カテゴリー</td>
+                <td data-label="内容">
+                  <%= @restaurant.decorate.arranged_categories %>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="項目">URL</td>
+                <td data-label="内容"><%= link_to nil, restaurant_url(@restaurant) %></td>
+              </tr>
+              <tr>
+                <td data-label="項目"><%= Restaurant.human_attribute_name("description") %></td>
+                <td data-label="内容"><%= safe_join(@restaurant.description.split("\n"), tag(:br)) %></td>
+              </tr>
+              <tr>
+                <td data-label="項目">組織</td>
+                <td data-label="内容"><%= @restaurant.organization.name %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Row / End -->
+
+        <!-- Row -->
+        <div class="row with-forms margin-bottom-20">
+          <!-- Map -->
+          <div class="col-md-12">
+            <div id="map-location-display" class="margin-top-25 margin-bottom-25" data-lat="<%= @restaurant.lat %>" data-lng="<%= @restaurant.lng %>"></div>
+          </div>
+        </div>
+        <!-- Row / End -->
+
+        <!-- Row -->
+        <% if @restaurant.images.attached? %>
+          <div class="row with-forms margin-bottom-20">
+            <!-- Images preview -->
+            <div class="col-md-12">
+              <div id="preview">
+                <% @restaurant.images.each do |image| %>
+                  <%= image_tag image.variant(resize: '300x200').processed %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <!-- Row / End -->
+
+        <%= link_to "編集", edit_organization_restaurant_path, class: "button margin-top-40" %>
+        <%= link_to "この飲食店を削除", organization_restaurant_path, method: :delete, data: { confirm: "削除すると復旧はできません。よろしいですか？" }, class: "border button" %>
+
+      </div>
+      <!-- Section / End -->
+    </div>
+  </div>

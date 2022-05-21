@@ -15,4 +15,12 @@ ja:
         address: 住所
         phone: 電話番号
         slug: URL末尾
+      restaurant:
+        name: 店名
+        address: 住所
+        lng: 緯度
+        lat: 経度
+        slug: URL末尾
+        description: 店の紹介
+        images: 画像
   attributes:

@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :require_login
-  before_action :only_business
+  before_action :only_business, except: %i[new create]
 
   layout 'mypage'
 
@@ -17,7 +17,7 @@ class OrganizationsController < ApplicationController
     if @organization.save
       redirect_to organizations_path, success: '組織を作成しました'
     else
-      flash.now[:danger] = '組織を作成できませんでした'
+      flash.now[:error] = '組織を作成できませんでした'
       render :new
     end
   end
