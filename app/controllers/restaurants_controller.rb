@@ -2,7 +2,12 @@ class RestaurantsController < ApplicationController
   layout :determine_layout
 
   def index
-    @restaurants = Restaurant.all.order(created_at: :desc)
+    @restaurants =
+      Restaurant
+        .with_attached_images
+        .includes(:restaurant_categories)
+        .all
+        .order(created_at: :desc)
   end
 
   def show
