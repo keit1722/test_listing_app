@@ -1,0 +1,101 @@
+<%= render 'shared/breadcrumbs_mypage', { title: "フォトスポット新規登録ページ" } %>
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <%= form_with model: @photo_spot, url: organization_photo_spots_path do |f| %>
+      <div id="add-listing">
+        <%= render 'shared/error_messages', model: f.object %>
+        <!-- Section -->
+        <div class="add-listing-section padding-top-25">
+
+          <!-- Row -->
+          <div class="row with-forms margin-bottom-20">
+            <!-- Name -->
+            <div class="col-md-12">
+              <h5><%= f.label :name %></h5>
+              <%= f.text_field :name %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms margin-bottom-20">
+            <!-- Address -->
+            <div class="col-md-12">
+              <h5><%= f.label :address %></h5>
+              <p>村以降の住所を入力してください。</p>
+              <%= f.text_field :address %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms margin-bottom-20">
+            <!-- Slug -->
+            <div class="col-md-12">
+              <h5><%= f.label :slug %></h5>
+              <p>他のユーザーの目に触れる箇所になります。<br>
+              <strong>後から変更ができません。 </strong><br>
+              アルファベット小文字、数字、ハイフン（-）が利用できます。</p>
+              <%= f.text_field :slug, inputmode: "numeric" %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms margin-bottom-20">
+            <!-- Description -->
+            <div class="col-md-12">
+              <h5><%= f.label :description %></h5>
+              <%= f.text_area :description, class: "WYSIWYG", cols: 40, rows: 3, id: "summary" %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms margin-bottom-20" id="map-section" data-model="photo_spot">
+            <div class="col-md-12">
+              <h5>位置情報</h5>
+              <p>正確な地図を作成するために、以下のマップをクリックしてお店の正確な位置にピンを置いてください。<br>
+              マップを移動させたり拡大していただくことが可能です。</p>
+              <!-- Map -->
+              <div id="map-location-registration" class="margin-bottom-25"></div>
+              <%= f.hidden_field :lat %>
+              <%= f.hidden_field :lng %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms margin-bottom-20">
+            <!-- Description -->
+            <div class="col-md-12">
+              <h5><%= f.label :images %></h5>
+              <%= f.label :images, class: "uploader-conteiner" do %>
+                <div class="uploader-inner">
+                  <i class="sl sl-icon-plus"></i>ここをクリックして画像をアップロードしてください
+                </div>
+                <%= f.file_field :images, multiple: true, class: "dropzone dz-clickable", onchange: "previewImage(this)" %>
+              <% end %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms">
+            <!-- Images preview -->
+            <div class="col-md-12">
+              <div id="preview"></div>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+        </div>
+        <!-- Section / End -->
+
+        <%= f.submit nil, class: "button margin-top-40" %>
+
+      </div>
+    <% end %>
+  </div>
