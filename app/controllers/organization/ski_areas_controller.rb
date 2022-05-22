@@ -4,40 +4,40 @@ class Organization::SkiAreasController < Organization::BaseController
   def index
     @ski_areas =
       current_user
-        .organizations
-        .find_by!(slug: params[:organization_slug])
-        .ski_areas
-        .page(params[:page])
-        .per(20)
-        .with_attached_images
+      .organizations
+      .find_by!(slug: params[:organization_slug])
+      .ski_areas
+      .page(params[:page])
+      .per(20)
+      .with_attached_images
   end
 
   def show
     @ski_area =
       current_user
-        .organizations
-        .find_by!(slug: params[:organization_slug])
-        .ski_areas
-        .with_attached_images
-        .find_by!(slug: params[:slug])
+      .organizations
+      .find_by!(slug: params[:organization_slug])
+      .ski_areas
+      .with_attached_images
+      .find_by!(slug: params[:slug])
   end
 
   def new
     @ski_area =
       current_user
-        .organizations
-        .find_by!(slug: params[:organization_slug])
-        .ski_areas
-        .build
+      .organizations
+      .find_by!(slug: params[:organization_slug])
+      .ski_areas
+      .build
   end
 
   def create
     @ski_area =
       current_user
-        .organizations
-        .find_by!(slug: params[:organization_slug])
-        .ski_areas
-        .build(ski_area_create_params)
+      .organizations
+      .find_by!(slug: params[:organization_slug])
+      .ski_areas
+      .build(ski_area_create_params)
 
     if @ski_area.save
       redirect_to organization_ski_areas_path, success: '登録しました'
@@ -50,20 +50,20 @@ class Organization::SkiAreasController < Organization::BaseController
   def edit
     @ski_area =
       current_user
-        .organizations
-        .find_by!(slug: params[:organization_slug])
-        .ski_areas
-        .with_attached_images
-        .find_by(slug: params[:slug])
+      .organizations
+      .find_by!(slug: params[:organization_slug])
+      .ski_areas
+      .with_attached_images
+      .find_by(slug: params[:slug])
   end
 
   def update
     @ski_area =
       current_user
-        .organizations
-        .find_by!(slug: params[:organization_slug])
-        .ski_areas
-        .find_by!(slug: params[:slug])
+      .organizations
+      .find_by!(slug: params[:organization_slug])
+      .ski_areas
+      .find_by!(slug: params[:slug])
 
     if @ski_area.update(ski_area_update_params)
       redirect_to organization_ski_area_path(@ski_area.organization, @ski_area),
@@ -77,10 +77,10 @@ class Organization::SkiAreasController < Organization::BaseController
   def destroy
     @ski_area =
       current_user
-        .organizations
-        .find_by!(slug: params[:organization_slug])
-        .ski_areas
-        .find_by(slug: params[:slug])
+      .organizations
+      .find_by!(slug: params[:organization_slug])
+      .ski_areas
+      .find_by(slug: params[:slug])
     @ski_area.destroy!
     redirect_to organization_ski_areas_path, success: '削除しました'
   end
