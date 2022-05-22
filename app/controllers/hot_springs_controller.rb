@@ -4,10 +4,10 @@ class HotSpringsController < ApplicationController
   def index
     @hot_springs =
       HotSpring
-        .with_attached_images
-        .page(params[:page])
-        .per(20)
-        .order(created_at: :desc)
+      .with_attached_images
+      .page(params[:page])
+      .per(20)
+      .order(created_at: :desc)
   end
 
   def show

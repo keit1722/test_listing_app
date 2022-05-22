@@ -4,10 +4,10 @@ class SkiAreasController < ApplicationController
   def index
     @ski_areas =
       SkiArea
-        .with_attached_images
-        .page(params[:page])
-        .per(20)
-        .order(created_at: :desc)
+      .with_attached_images
+      .page(params[:page])
+      .per(20)
+      .order(created_at: :desc)
   end
 
   def show
