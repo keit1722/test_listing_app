@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :shops, param: :slug
       resources :hotels, param: :slug
       resources :activities, param: :slug
+      resources :hot_springs, param: :slug
     end
   end
 
@@ -26,4 +27,5 @@ Rails.application.routes.draw do
   resources :shops, param: :slug, only: %i[index show]
   resources :hotels, param: :slug, only: %i[index show]
   resources :activities, param: :slug, only: %i[index show]
+  resources :hot_springs, param: :slug, only: %i[index show]
 end
