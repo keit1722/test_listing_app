@@ -109,6 +109,21 @@ ActiveRecord::Schema.define(version: 2022_05_19_041819) do
     t.index ["slug"], name: "index_organizations_on_slug", unique: true
   end
 
+  create_table "photo_spots", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address", null: false
+    t.float "lat", null: false
+    t.float "lng", null: false
+    t.string "slug", null: false
+    t.text "description", null: false
+    t.bigint "organization_id"
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.index ["name"], name: "index_photo_spots_on_name", unique: true
+    t.index ["organization_id"], name: "index_photo_spots_on_organization_id"
+    t.index ["slug"], name: "index_photo_spots_on_slug", unique: true
+  end
+
   create_table "restaurant_categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -211,6 +226,7 @@ ActiveRecord::Schema.define(version: 2022_05_19_041819) do
   add_foreign_key "hotels", "organizations"
   add_foreign_key "organization_users", "organizations"
   add_foreign_key "organization_users", "users"
+  add_foreign_key "photo_spots", "organizations"
   add_foreign_key "restaurant_category_mappings", "restaurant_categories"
   add_foreign_key "restaurant_category_mappings", "restaurants"
   add_foreign_key "restaurants", "organizations"
