@@ -1,0 +1,22 @@
+<%= render 'shared/breadcrumbs_mypage', { title: "登録した温泉" } %>
+
+<div class="row">
+
+  <!-- Listings -->
+  <div class="col-lg-12 col-md-12">
+    <div class="dashboard-list-box margin-top-0">
+      <% if @hot_springs.size == 0 %>
+        <h4>登録した温泉はありません</h4>
+      <% else %>
+        <ul>
+          <%= render @hot_springs %>
+        </ul>
+      <% end %>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="pagination-container margin-top-30 margin-bottom-0">
+      <%= paginate @hot_springs %>
+    </div>
+
+  </div>

@@ -1,0 +1,17 @@
+<li>
+  <div class="list-box-listing">
+    <div class="list-box-listing-img">
+      <% if hot_spring.images.attached? %>
+        <%= link_to image_tag(hot_spring.images.first), organization_hot_spring_path(hot_spring.organization, hot_spring) %>
+      <% end %>
+    </div>
+    <div class="list-box-listing-content">
+      <div class="inner">
+        <h3><%= link_to hot_spring.name, organization_hot_spring_path(hot_spring.organization, hot_spring) %></h3>
+        <span><%= hot_spring.address %></span>
+      </div>
+    </div>
+  </div>
+  <div class="buttons-to-right">
+  </div>
+</li>
