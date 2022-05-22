@@ -1,0 +1,17 @@
+<li>
+  <div class="list-box-listing">
+    <div class="list-box-listing-img">
+      <% if photo_spot.images.attached? %>
+        <%= link_to image_tag(photo_spot.images.first), organization_photo_spot_path(photo_spot.organization, photo_spot) %>
+      <% end %>
+    </div>
+    <div class="list-box-listing-content">
+      <div class="inner">
+        <h3><%= link_to photo_spot.name, organization_photo_spot_path(photo_spot.organization, photo_spot) %></h3>
+        <span><%= photo_spot.address %></span>
+      </div>
+    </div>
+  </div>
+  <div class="buttons-to-right">
+  </div>
+</li>
