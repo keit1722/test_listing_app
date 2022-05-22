@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: hot_springs
+# Table name: photo_spots
 #
 #  id              :bigint           not null, primary key
 #  address         :string           not null
@@ -15,15 +15,15 @@
 #
 # Indexes
 #
-#  index_hot_springs_on_name             (name) UNIQUE
-#  index_hot_springs_on_organization_id  (organization_id)
-#  index_hot_springs_on_slug             (slug) UNIQUE
+#  index_photo_spots_on_name             (name) UNIQUE
+#  index_photo_spots_on_organization_id  (organization_id)
+#  index_photo_spots_on_slug             (slug) UNIQUE
 #
 # Foreign Keys
 #
 #  fk_rails_...  (organization_id => organizations.id)
 #
-class HotSpring < ApplicationRecord
+class PhotoSpot < ApplicationRecord
   belongs_to :organization
 
   has_many_attached :images

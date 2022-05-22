@@ -1,46 +1,46 @@
-class Organization::SkiAreasController < Organization::BaseController
+class Organization::PhotoSpotsController < Organization::BaseController
   layout :determine_mypage_layout
 
   def index
-    @ski_areas =
+    @photo_spots =
       current_user
       .organizations
       .find_by!(slug: params[:organization_slug])
-      .ski_areas
+      .photo_spots
       .page(params[:page])
       .per(20)
       .with_attached_images
   end
 
   def show
-    @ski_area =
+    @photo_spot =
       current_user
       .organizations
       .find_by!(slug: params[:organization_slug])
-      .ski_areas
+      .photo_spots
       .with_attached_images
       .find_by!(slug: params[:slug])
   end
 
   def new
-    @ski_area =
+    @photo_spot =
       current_user
       .organizations
       .find_by!(slug: params[:organization_slug])
-      .ski_areas
+      .photo_spots
       .build
   end
 
   def create
-    @ski_area =
+    @photo_spot =
       current_user
       .organizations
       .find_by!(slug: params[:organization_slug])
-      .ski_areas
-      .build(ski_area_create_params)
+      .photo_spots
+      .build(photo_spot_create_params)
 
-    if @ski_area.save
-      redirect_to organization_ski_areas_path, success: '登録しました'
+    if @photo_spot.save
+      redirect_to organization_photo_spots_path, success: '登録しました'
     else
       flash.now[:error] = '登録に失敗しました'
       render :new
@@ -48,25 +48,28 @@ class Organization::SkiAreasController < Organization::BaseController
   end
 
   def edit
-    @ski_area =
+    @photo_spot =
       current_user
       .organizations
       .find_by!(slug: params[:organization_slug])
-      .ski_areas
+      .photo_spots
       .with_attached_images
       .find_by(slug: params[:slug])
   end
 
   def update
-    @ski_area =
+    @photo_spot =
       current_user
       .organizations
       .find_by!(slug: params[:organization_slug])
-      .ski_areas
+      .photo_spots
       .find_by!(slug: params[:slug])
 
-    if @ski_area.update(ski_area_update_params)
-      redirect_to organization_ski_area_path(@ski_area.organization, @ski_area),
+    if @photo_spot.update(photo_spot_update_params)
+      redirect_to organization_photo_spot_path(
+        @photo_spot.organization,
+        @photo_spot
+      ),
                   success: '情報を更新しました'
     else
       flash.now[:error] = '情報の更新に失敗しました'
@@ -75,27 +78,27 @@ class Organization::SkiAreasController < Organization::BaseController
   end
 
   def destroy
-    @ski_area =
+    @photo_spot =
       current_user
       .organizations
       .find_by!(slug: params[:organization_slug])
-      .ski_areas
+      .photo_spots
       .find_by(slug: params[:slug])
-    @ski_area.destroy!
-    redirect_to organization_ski_areas_path, success: '削除しました'
+    @photo_spot.destroy!
+    redirect_to organization_photo_spots_path, success: '削除しました'
   end
 
   private
 
-  def ski_area_create_params
+  def photo_spot_create_params
     params
-      .require(:ski_area)
+      .require(:photo_spot)
       .permit(:name, :lat, :lng, :slug, :description, :address, images: [])
   end
 
-  def ski_area_update_params
+  def photo_spot_update_params
     params
-      .require(:ski_area)
+      .require(:photo_spot)
       .permit(:name, :lat, :lng, :description, :address, images: [])
   end
 end

@@ -1,9 +1,9 @@
-class ActivitiesController < ApplicationController
+class PhotoSpotsController < ApplicationController
   layout :determine_layout
 
   def index
-    @activities =
-      Activity
+    @photo_spots =
+      PhotoSpot
       .with_attached_images
       .page(params[:page])
       .per(20)
@@ -11,6 +11,6 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    @activity = Activity.with_attached_images.find_by(slug: params[:slug])
+    @photo_spot = PhotoSpot.with_attached_images.find_by(slug: params[:slug])
   end
 end

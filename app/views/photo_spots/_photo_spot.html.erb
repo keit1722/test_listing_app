@@ -1,0 +1,24 @@
+<div class="col-lg-12 col-md-12">
+  <div class="listing-item-container list-layout" data-marker-id="<%= photo_spot_counter + 1 %>" data-latitude="<%= photo_spot.lat %>" data-longitude="<%= photo_spot.lng %>">
+    <%= link_to photo_spot_path(photo_spot), class: "listing-item" do %>
+
+      <!-- Image -->
+      <div class="listing-item-image">
+        <% if photo_spot.images.attached? %>
+         <%= image_tag photo_spot.images.first, class: "listing-image" %>
+        <% end %>
+         <span class="tag listing-category" style="visibility:hidden;"></span>
+      </div>
+
+      <!-- Content -->
+      <div class="listing-item-content">
+
+        <div class="listing-item-inner">
+          <h3 class="listing-name"><%= photo_spot.name %></h3>
+          <span class="listing-address"><%= photo_spot.address %></span>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+</div>
