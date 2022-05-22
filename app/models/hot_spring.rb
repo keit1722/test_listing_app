@@ -24,6 +24,8 @@
 #  fk_rails_...  (organization_id => organizations.id)
 #
 class HotSpring < ApplicationRecord
+  belongs_to :organization
+
   has_many_attached :images
 
   validates :name, length: { maximum: 100 }, uniqueness: true, presence: true

@@ -22,6 +22,7 @@ class Organization < ApplicationRecord
   has_many :shops, dependent: :destroy
   has_many :hotels, dependent: :destroy
   has_many :activities, dependent: :destroy
+  has_many :hot_springs, dependent: :destroy
 
   validates :name, length: { maximum: 100 }, uniqueness: true, presence: true
   validates :address, length: { maximum: 100 }, presence: true
