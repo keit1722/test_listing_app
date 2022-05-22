@@ -1,0 +1,17 @@
+<li>
+  <div class="list-box-listing">
+    <div class="list-box-listing-img">
+      <% if ski_area.images.attached? %>
+        <%= link_to image_tag(ski_area.images.first), organization_ski_area_path(ski_area.organization, ski_area) %>
+      <% end %>
+    </div>
+    <div class="list-box-listing-content">
+      <div class="inner">
+        <h3><%= link_to ski_area.name, organization_ski_area_path(ski_area.organization, ski_area) %></h3>
+        <span><%= ski_area.address %></span>
+      </div>
+    </div>
+  </div>
+  <div class="buttons-to-right">
+  </div>
+</li>
