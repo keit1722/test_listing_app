@@ -173,6 +173,21 @@ ActiveRecord::Schema.define(version: 2022_05_19_041819) do
     t.index ["slug"], name: "index_shops_on_slug", unique: true
   end
 
+  create_table "ski_areas", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address", null: false
+    t.float "lat", null: false
+    t.float "lng", null: false
+    t.string "slug", null: false
+    t.text "description", null: false
+    t.bigint "organization_id"
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.index ["name"], name: "index_ski_areas_on_name", unique: true
+    t.index ["organization_id"], name: "index_ski_areas_on_organization_id"
+    t.index ["slug"], name: "index_ski_areas_on_slug", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -202,4 +217,5 @@ ActiveRecord::Schema.define(version: 2022_05_19_041819) do
   add_foreign_key "shop_category_mappings", "shop_categories"
   add_foreign_key "shop_category_mappings", "shops"
   add_foreign_key "shops", "organizations"
+  add_foreign_key "ski_areas", "organizations"
 end
