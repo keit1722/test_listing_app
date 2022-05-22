@@ -54,4 +54,12 @@ ja:
         slug: URL末尾
         description: アクティビティの紹介
         images: 画像
+      hot_spring:
+        name: 温泉の名前
+        address: 住所
+        lng: 緯度
+        lat: 経度
+        slug: URL末尾
+        description: 温泉の紹介
+        images: 画像
   attributes:
