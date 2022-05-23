@@ -1,0 +1,22 @@
+<%= render 'shared/breadcrumbs_mypage', { title: "お気に入り一覧" } %>
+
+<div class="row">
+
+  <!-- Listings -->
+  <div class="col-lg-12 col-md-12">
+    <div class="dashboard-list-box margin-top-0">
+      <% if @bookmarks.size == 0 %>
+        <h4>お気に入りは登録されていません</h4>
+      <% end %>
+        <ul>
+          <%= render @bookmarks %>
+        </ul>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+    <div class="pagination-container margin-top-30 margin-bottom-0">
+      <%= paginate @bookmarks %>
+    </div>
+
+  </div>
