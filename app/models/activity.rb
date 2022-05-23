@@ -51,6 +51,7 @@ class Activity < ApplicationRecord
               max: 5,
             },
             content_type: %i[png jpg jpeg]
+  validates :district_ids, presence: true
 
   def to_param
     slug

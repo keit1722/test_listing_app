@@ -55,6 +55,7 @@ class Restaurant < ApplicationRecord
             content_type: %i[png jpg jpeg]
 
   validates :restaurant_category_ids, presence: true
+  validates :district_ids, presence: true
 
   def to_param
     slug
