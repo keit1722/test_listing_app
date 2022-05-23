@@ -20,6 +20,10 @@
                 <td data-label="内容"><%= @photo_spot.address %></td>
               </tr>
               <tr>
+                <td data-label="項目">地区</td>
+                <td data-label="内容"><%= @photo_spot.districts.first.name %></td>
+              </tr>
+              <tr>
                 <td data-label="項目">URL</td>
                 <td data-label="内容"><%= link_to nil, photo_spot_url(@photo_spot) %></td>
               </tr>

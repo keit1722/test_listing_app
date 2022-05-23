@@ -20,6 +20,10 @@
                 <td data-label="内容"><%= @activity.address %></td>
               </tr>
               <tr>
+                <td data-label="項目">地区</td>
+                <td data-label="内容"><%= @activity.districts.first.name %></td>
+              </tr>
+              <tr>
                 <td data-label="項目">URL</td>
                 <td data-label="内容"><%= link_to nil, activity_url(@activity) %></td>
               </tr>
