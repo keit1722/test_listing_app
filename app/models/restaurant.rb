@@ -30,6 +30,8 @@ class Restaurant < ApplicationRecord
 
   has_many :restaurant_category_mappings, dependent: :destroy
   has_many :restaurant_categories, through: :restaurant_category_mappings
+  has_many :district_mappings, as: :districtable, dependent: :destroy
+  has_many :districts, through: :district_mappings
 
   validates :name, length: { maximum: 100 }, uniqueness: true, presence: true
   validates :address, length: { maximum: 100 }, presence: true
@@ -37,20 +39,20 @@ class Restaurant < ApplicationRecord
   validates :lng, presence: true
   validates :slug,
             length: {
-              maximum: 100
+              maximum: 100,
             },
             uniqueness: true,
             presence: true,
             format: {
-              with: /\A[a-z0-9\-]+\z/
+              with: /\A[a-z0-9\-]+\z/,
             }
   validates :description, length: { maximum: 10_000 }, presence: true
   validates :images,
             attached: true,
             limit: {
-              max: 5
+              max: 5,
             },
-            content_type: [:png, :jpg, :jpeg]
+            content_type: %i[png jpg jpeg]
 
   validates :restaurant_category_ids, presence: true
 
