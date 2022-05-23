@@ -29,6 +29,8 @@ class Organization::HotSpringsController < Organization::BaseController
         .find_by!(slug: params[:organization_slug])
         .hot_springs
         .build
+
+    @districts = District.all
   end
 
   def create
@@ -38,6 +40,8 @@ class Organization::HotSpringsController < Organization::BaseController
         .find_by!(slug: params[:organization_slug])
         .hot_springs
         .build(hot_spring_create_params)
+
+    @districts = District.all
 
     if @hot_spring.save
       redirect_to organization_hot_springs_path, success: '登録しました'
@@ -55,6 +59,8 @@ class Organization::HotSpringsController < Organization::BaseController
         .hot_springs
         .with_attached_images
         .find_by(slug: params[:slug])
+
+    @districts = District.all
   end
 
   def update
@@ -65,6 +71,8 @@ class Organization::HotSpringsController < Organization::BaseController
         .hot_springs
         .with_attached_images
         .find_by!(slug: params[:slug])
+
+    @districts = District.all
 
     if @hot_spring.update(hot_spring_update_params)
       redirect_to organization_hot_spring_path(
@@ -94,12 +102,29 @@ class Organization::HotSpringsController < Organization::BaseController
   def hot_spring_create_params
     params
       .require(:hot_spring)
-      .permit(:name, :lat, :lng, :slug, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :slug,
+        :description,
+        :address,
+        :district_ids,
+        images: [],
+      )
   end
 
   def hot_spring_update_params
     params
       .require(:hot_spring)
-      .permit(:name, :lat, :lng, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :description,
+        :address,
+        :district_ids,
+        images: [],
+      )
   end
 end

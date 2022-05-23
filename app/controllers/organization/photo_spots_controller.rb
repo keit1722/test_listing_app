@@ -29,6 +29,8 @@ class Organization::PhotoSpotsController < Organization::BaseController
         .find_by!(slug: params[:organization_slug])
         .photo_spots
         .build
+
+    @districts = District.all
   end
 
   def create
@@ -38,6 +40,8 @@ class Organization::PhotoSpotsController < Organization::BaseController
         .find_by!(slug: params[:organization_slug])
         .photo_spots
         .build(photo_spot_create_params)
+
+    @districts = District.all
 
     if @photo_spot.save
       redirect_to organization_photo_spots_path, success: '登録しました'
@@ -55,6 +59,8 @@ class Organization::PhotoSpotsController < Organization::BaseController
         .photo_spots
         .with_attached_images
         .find_by(slug: params[:slug])
+
+    @districts = District.all
   end
 
   def update
@@ -65,6 +71,8 @@ class Organization::PhotoSpotsController < Organization::BaseController
         .photo_spots
         .with_attached_images
         .find_by!(slug: params[:slug])
+
+    @districts = District.all
 
     if @photo_spot.update(photo_spot_update_params)
       redirect_to organization_photo_spot_path(
@@ -94,12 +102,29 @@ class Organization::PhotoSpotsController < Organization::BaseController
   def photo_spot_create_params
     params
       .require(:photo_spot)
-      .permit(:name, :lat, :lng, :slug, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :slug,
+        :description,
+        :address,
+        :district_ids,
+        images: [],
+      )
   end
 
   def photo_spot_update_params
     params
       .require(:photo_spot)
-      .permit(:name, :lat, :lng, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :description,
+        :address,
+        :district_ids,
+        images: [],
+      )
   end
 end

@@ -30,6 +30,7 @@ class Organization::RestaurantsController < Organization::BaseController
         .restaurants
         .build
     @restaurant_categories = RestaurantCategory.all
+    @districts = District.all
   end
 
   def create
@@ -41,6 +42,7 @@ class Organization::RestaurantsController < Organization::BaseController
         .build(restaurant_create_params)
 
     @restaurant_categories = RestaurantCategory.all
+    @districts = District.all
     if @restaurant.save
       redirect_to organization_restaurants_path, success: '登録しました'
     else
@@ -58,6 +60,7 @@ class Organization::RestaurantsController < Organization::BaseController
         .with_attached_images
         .find_by(slug: params[:slug])
     @restaurant_categories = RestaurantCategory.all
+    @districts = District.all
   end
 
   def update
@@ -69,6 +72,7 @@ class Organization::RestaurantsController < Organization::BaseController
         .with_attached_images
         .find_by!(slug: params[:slug])
     @restaurant_categories = RestaurantCategory.all
+    @districts = District.all
 
     if @restaurant.update(restaurant_update_params)
       redirect_to organization_restaurant_path(

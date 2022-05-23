@@ -30,6 +30,7 @@ class Organization::ShopsController < Organization::BaseController
         .shops
         .build
     @shop_categories = ShopCategory.all
+    @districts = District.all
   end
 
   def create
@@ -41,6 +42,7 @@ class Organization::ShopsController < Organization::BaseController
         .build(shop_create_params)
 
     @shop_categories = ShopCategory.all
+    @districts = District.all
     if @shop.save
       redirect_to organization_shops_path, success: '登録しました'
     else
@@ -58,6 +60,7 @@ class Organization::ShopsController < Organization::BaseController
         .with_attached_images
         .find_by(slug: params[:slug])
     @shop_categories = ShopCategory.all
+    @districts = District.all
   end
 
   def update
@@ -69,6 +72,7 @@ class Organization::ShopsController < Organization::BaseController
         .with_attached_images
         .find_by!(slug: params[:slug])
     @shop_categories = ShopCategory.all
+    @districts = District.all
 
     if @shop.update(shop_update_params)
       redirect_to organization_shop_path(@shop.organization, @shop),
@@ -102,6 +106,7 @@ class Organization::ShopsController < Organization::BaseController
         :slug,
         :description,
         :address,
+        :district_ids,
         images: [],
         shop_category_ids: [],
       )
@@ -116,6 +121,7 @@ class Organization::ShopsController < Organization::BaseController
         :lng,
         :description,
         :address,
+        :district_ids,
         images: [],
         shop_category_ids: [],
       )
