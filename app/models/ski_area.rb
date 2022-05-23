@@ -30,6 +30,8 @@ class SkiArea < ApplicationRecord
 
   has_many :district_mappings, as: :districtable, dependent: :destroy
   has_many :districts, through: :district_mappings
+  has_many :bookmarks, as: :bookmarkable, dependent: :destroy
+  has_many :users, through: :bookmarks
 
   validates :name, length: { maximum: 100 }, uniqueness: true, presence: true
   validates :address, length: { maximum: 100 }, presence: true
