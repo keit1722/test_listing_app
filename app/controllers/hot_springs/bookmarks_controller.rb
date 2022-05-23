@@ -4,6 +4,6 @@ class HotSprings::BookmarksController < BookmarksController
   private
 
   def set_bookmarkable
-    @bookmarkable = Restaurant.find_by(slug: params[:restaurant_slug])
+    @bookmarkable = HotSpring.find_by(slug: params[:hot_spring_slug])
   end
 end

@@ -4,6 +4,6 @@ class SkiAreas::BookmarksController < BookmarksController
   private
 
   def set_bookmarkable
-    @bookmarkable = Restaurant.find_by(slug: params[:restaurant_slug])
+    @bookmarkable = SkiArea.find_by(slug: params[:ski_area_slug])
   end
 end
