@@ -4,40 +4,44 @@ class Organization::PhotoSpotsController < Organization::BaseController
   def index
     @photo_spots =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .photo_spots
-      .page(params[:page])
-      .per(20)
-      .with_attached_images
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .photo_spots
+        .page(params[:page])
+        .per(20)
+        .with_attached_images
   end
 
   def show
     @photo_spot =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .photo_spots
-      .with_attached_images
-      .find_by!(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .photo_spots
+        .with_attached_images
+        .find_by!(slug: params[:slug])
   end
 
   def new
     @photo_spot =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .photo_spots
-      .build
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .photo_spots
+        .build
+
+    @districts = District.all
   end
 
   def create
     @photo_spot =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .photo_spots
-      .build(photo_spot_create_params)
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .photo_spots
+        .build(photo_spot_create_params)
+
+    @districts = District.all
 
     if @photo_spot.save
       redirect_to organization_photo_spots_path, success: '登録しました'
@@ -50,26 +54,31 @@ class Organization::PhotoSpotsController < Organization::BaseController
   def edit
     @photo_spot =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .photo_spots
-      .with_attached_images
-      .find_by(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .photo_spots
+        .with_attached_images
+        .find_by(slug: params[:slug])
+
+    @districts = District.all
   end
 
   def update
     @photo_spot =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .photo_spots
-      .find_by!(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .photo_spots
+        .with_attached_images
+        .find_by!(slug: params[:slug])
+
+    @districts = District.all
 
     if @photo_spot.update(photo_spot_update_params)
       redirect_to organization_photo_spot_path(
-        @photo_spot.organization,
-        @photo_spot
-      ),
+                    @photo_spot.organization,
+                    @photo_spot,
+                  ),
                   success: '情報を更新しました'
     else
       flash.now[:error] = '情報の更新に失敗しました'
@@ -80,10 +89,10 @@ class Organization::PhotoSpotsController < Organization::BaseController
   def destroy
     @photo_spot =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .photo_spots
-      .find_by(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .photo_spots
+        .find_by(slug: params[:slug])
     @photo_spot.destroy!
     redirect_to organization_photo_spots_path, success: '削除しました'
   end
@@ -93,12 +102,29 @@ class Organization::PhotoSpotsController < Organization::BaseController
   def photo_spot_create_params
     params
       .require(:photo_spot)
-      .permit(:name, :lat, :lng, :slug, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :slug,
+        :description,
+        :address,
+        :district_ids,
+        images: [],
+      )
   end
 
   def photo_spot_update_params
     params
       .require(:photo_spot)
-      .permit(:name, :lat, :lng, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :description,
+        :address,
+        :district_ids,
+        images: [],
+      )
   end
 end

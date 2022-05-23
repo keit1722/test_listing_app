@@ -20,6 +20,10 @@
                 <td data-label="内容"><%= @hot_spring.address %></td>
               </tr>
               <tr>
+                <td data-label="項目">地区</td>
+                <td data-label="内容"><%= @hot_spring.districts.first.name %></td>
+              </tr>
+              <tr>
                 <td data-label="項目">URL</td>
                 <td data-label="内容"><%= link_to nil, hot_spring_url(@hot_spring) %></td>
               </tr>

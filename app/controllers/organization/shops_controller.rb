@@ -4,43 +4,45 @@ class Organization::ShopsController < Organization::BaseController
   def index
     @shops =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .shops
-      .page(params[:page])
-      .per(20)
-      .with_attached_images
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .shops
+        .page(params[:page])
+        .per(20)
+        .with_attached_images
   end
 
   def show
     @shop =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .shops
-      .with_attached_images
-      .find_by!(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .shops
+        .with_attached_images
+        .find_by!(slug: params[:slug])
   end
 
   def new
     @shop =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .shops
-      .build
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .shops
+        .build
     @shop_categories = ShopCategory.all
+    @districts = District.all
   end
 
   def create
     @shop =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .shops
-      .build(shop_create_params)
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .shops
+        .build(shop_create_params)
 
     @shop_categories = ShopCategory.all
+    @districts = District.all
     if @shop.save
       redirect_to organization_shops_path, success: '登録しました'
     else
@@ -52,22 +54,25 @@ class Organization::ShopsController < Organization::BaseController
   def edit
     @shop =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .shops
-      .with_attached_images
-      .find_by(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .shops
+        .with_attached_images
+        .find_by(slug: params[:slug])
     @shop_categories = ShopCategory.all
+    @districts = District.all
   end
 
   def update
     @shop =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .shops
-      .find_by!(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .shops
+        .with_attached_images
+        .find_by!(slug: params[:slug])
     @shop_categories = ShopCategory.all
+    @districts = District.all
 
     if @shop.update(shop_update_params)
       redirect_to organization_shop_path(@shop.organization, @shop),
@@ -81,10 +86,10 @@ class Organization::ShopsController < Organization::BaseController
   def destroy
     @shop =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .shops
-      .find_by(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .shops
+        .find_by(slug: params[:slug])
     @shop.destroy!
     redirect_to organization_shops_path, success: '削除しました'
   end
@@ -101,8 +106,9 @@ class Organization::ShopsController < Organization::BaseController
         :slug,
         :description,
         :address,
+        :district_ids,
         images: [],
-        shop_category_ids: []
+        shop_category_ids: [],
       )
   end
 
@@ -115,8 +121,9 @@ class Organization::ShopsController < Organization::BaseController
         :lng,
         :description,
         :address,
+        :district_ids,
         images: [],
-        shop_category_ids: []
+        shop_category_ids: [],
       )
   end
 end

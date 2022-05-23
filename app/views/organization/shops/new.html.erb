@@ -23,8 +23,17 @@
             <!-- Address -->
             <div class="col-md-12">
               <h5><%= f.label :address %></h5>
-              <p>村以降の住所を入力してください。</p>
               <%= f.text_field :address %>
+            </div>
+          </div>
+          <!-- Row / End -->
+
+          <!-- Row -->
+          <div class="row with-forms margin-bottom-20">
+            <!-- Restaurant category -->
+            <div class="col-md-12">
+            <h5>地区</h5>
+            <%= f.collection_select :district_ids, @districts, :id, :name, {prompt: ""}, {class: "chosen-select", data: {placeholder: "ここをクリックして地区を選択"}} %>
             </div>
           </div>
           <!-- Row / End -->
