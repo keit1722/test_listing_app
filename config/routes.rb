@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     patch 'profile', to: 'users#update'
     delete 'profile', to: 'users#destroy'
     get 'profile/edit', to: 'users#edit'
+    resources :bookmarks, only: %i[index]
   end
 
   resources :organizations, param: :slug do
@@ -25,11 +26,25 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :restaurants, param: :slug, only: %i[index show]
-  resources :shops, param: :slug, only: %i[index show]
-  resources :hotels, param: :slug, only: %i[index show]
-  resources :activities, param: :slug, only: %i[index show]
-  resources :hot_springs, param: :slug, only: %i[index show]
-  resources :ski_areas, param: :slug, only: %i[index show]
-  resources :photo_spots, param: :slug, only: %i[index show]
+  resources :restaurants, param: :slug, only: %i[index show] do
+    resource :bookmarks, only: %i[create destroy], module: :restaurants
+  end
+  resources :shops, param: :slug, only: %i[index show] do
+    resource :bookmarks, only: %i[create destroy], module: :shops
+  end
+  resources :hotels, param: :slug, only: %i[index show] do
+    resource :bookmarks, only: %i[create destroy], module: :hotels
+  end
+  resources :activities, param: :slug, only: %i[index show] do
+    resource :bookmarks, only: %i[create destroy], module: :activities
+  end
+  resources :hot_springs, param: :slug, only: %i[index show] do
+    resource :bookmarks, only: %i[create destroy], module: :hot_springs
+  end
+  resources :ski_areas, param: :slug, only: %i[index show] do
+    resource :bookmarks, only: %i[create destroy], module: :ski_areas
+  end
+  resources :photo_spots, param: :slug, only: %i[index show] do
+    resource :bookmarks, only: %i[create destroy], module: :photo_spots
+  end
 end

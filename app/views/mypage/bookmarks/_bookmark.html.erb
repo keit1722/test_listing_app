@@ -1,0 +1,13 @@
+<li>
+  <div class="list-box-listing">
+    <div class="list-box-listing-img">
+      <%= link_to image_tag(bookmark.bookmarkable.images.first), bookmark.bookmarkable %>
+    </div>
+    <div class="list-box-listing-content">
+      <div class="inner">
+        <h3><%= link_to bookmark.bookmarkable.name, bookmark.bookmarkable %></h3>
+        <span><%= bookmark.bookmarkable.address %></span>
+      </div>
+    </div>
+  </div>
+</li>
