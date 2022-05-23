@@ -32,6 +32,7 @@ class Activity < ApplicationRecord
   has_many :districts, through: :district_mappings
   has_many :bookmarks, as: :bookmarkable, dependent: :destroy
   has_many :users, through: :bookmarks
+  has_many :posts, as: :postable
 
   validates :name, length: { maximum: 100 }, uniqueness: true, presence: true
   validates :address, length: { maximum: 100 }, presence: true
