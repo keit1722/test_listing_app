@@ -4,40 +4,44 @@ class Organization::ActivitiesController < Organization::BaseController
   def index
     @activities =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .activities
-      .page(params[:page])
-      .per(20)
-      .with_attached_images
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .activities
+        .page(params[:page])
+        .per(20)
+        .with_attached_images
   end
 
   def show
     @activity =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .activities
-      .with_attached_images
-      .find_by!(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .activities
+        .with_attached_images
+        .find_by!(slug: params[:slug])
   end
 
   def new
     @activity =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .activities
-      .build
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .activities
+        .build
+
+    @districts = District.all
   end
 
   def create
     @activity =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .activities
-      .build(activity_create_params)
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .activities
+        .build(activity_create_params)
+
+    @districts = District.all
 
     if @activity.save
       redirect_to organization_activities_path, success: '登録しました'
@@ -50,20 +54,25 @@ class Organization::ActivitiesController < Organization::BaseController
   def edit
     @activity =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .activities
-      .with_attached_images
-      .find_by(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .activities
+        .with_attached_images
+        .find_by(slug: params[:slug])
+
+    @districts = District.all
   end
 
   def update
     @activity =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .activities
-      .find_by!(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .activities
+        .with_attached_images
+        .find_by!(slug: params[:slug])
+
+    @districts = District.all
 
     if @activity.update(activity_update_params)
       redirect_to organization_activity_path(@activity.organization, @activity),
@@ -77,10 +86,10 @@ class Organization::ActivitiesController < Organization::BaseController
   def destroy
     @activity =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .activitys
-      .find_by(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .activitys
+        .find_by(slug: params[:slug])
     @activity.destroy!
     redirect_to organization_activities_path, success: '削除しました'
   end
@@ -90,12 +99,29 @@ class Organization::ActivitiesController < Organization::BaseController
   def activity_create_params
     params
       .require(:activity)
-      .permit(:name, :lat, :lng, :slug, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :slug,
+        :description,
+        :address,
+        :district_ids,
+        images: [],
+      )
   end
 
   def activity_update_params
     params
       .require(:activity)
-      .permit(:name, :lat, :lng, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :description,
+        :address,
+        :district_ids,
+        images: [],
+      )
   end
 end

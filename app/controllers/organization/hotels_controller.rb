@@ -4,41 +4,44 @@ class Organization::HotelsController < Organization::BaseController
   def index
     @hotels =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .hotels
-      .page(params[:page])
-      .per(20)
-      .with_attached_images
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .hotels
+        .page(params[:page])
+        .per(20)
+        .with_attached_images
   end
 
   def show
     @hotel =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .hotels
-      .with_attached_images
-      .find_by!(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .hotels
+        .with_attached_images
+        .find_by!(slug: params[:slug])
   end
 
   def new
     @hotel =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .hotels
-      .build
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .hotels
+        .build
+
+    @districts = District.all
   end
 
   def create
     @hotel =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .hotels
-      .build(hotel_create_params)
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .hotels
+        .build(hotel_create_params)
 
+    @districts = District.all
     if @hotel.save
       redirect_to organization_hotels_path, success: '登録しました'
     else
@@ -50,20 +53,25 @@ class Organization::HotelsController < Organization::BaseController
   def edit
     @hotel =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .hotels
-      .with_attached_images
-      .find_by(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .hotels
+        .with_attached_images
+        .find_by(slug: params[:slug])
+
+    @districts = District.all
   end
 
   def update
     @hotel =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .hotels
-      .find_by!(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .hotels
+        .with_attached_images
+        .find_by!(slug: params[:slug])
+
+    @districts = District.all
 
     if @hotel.update(hotel_update_params)
       redirect_to organization_hotel_path(@hotel.organization, @hotel),
@@ -77,10 +85,10 @@ class Organization::HotelsController < Organization::BaseController
   def destroy
     @hotel =
       current_user
-      .organizations
-      .find_by!(slug: params[:organization_slug])
-      .hotels
-      .find_by(slug: params[:slug])
+        .organizations
+        .find_by!(slug: params[:organization_slug])
+        .hotels
+        .find_by(slug: params[:slug])
     @hotel.destroy!
     redirect_to organization_hotels_path, success: '削除しました'
   end
@@ -90,12 +98,29 @@ class Organization::HotelsController < Organization::BaseController
   def hotel_create_params
     params
       .require(:hotel)
-      .permit(:name, :lat, :lng, :slug, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :slug,
+        :description,
+        :address,
+        :district_ids,
+        images: [],
+      )
   end
 
   def hotel_update_params
     params
       .require(:hotel)
-      .permit(:name, :lat, :lng, :description, :address, images: [])
+      .permit(
+        :name,
+        :lat,
+        :lng,
+        :description,
+        :address,
+        :district_ids,
+        images: [],
+      )
   end
 end
