@@ -25,4 +25,24 @@ class Post < ApplicationRecord
   validates :status, presence: true
 
   enum status: { published: 1, draft: 2 }
+
+  scope :three, -> { first(3) }
+
+  def previous
+    postable
+      .posts
+      .published
+      .where('created_at < ?', self.created_at)
+      .order('created_at DESC')
+      .first
+  end
+
+  def next
+    postable
+      .posts
+      .published
+      .where('created_at > ?', self.created_at)
+      .order('created_at ASC')
+      .first
+  end
 end
