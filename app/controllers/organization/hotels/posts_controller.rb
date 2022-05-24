@@ -13,3 +13,4 @@ class Organization::Hotels::PostsController < Organization::PostsController
         .hotels
         .find_by(slug: params[:hotel_slug])
   end
+end

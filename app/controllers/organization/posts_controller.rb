@@ -17,7 +17,7 @@ class Organization::PostsController < ApplicationController
     @post = @postable.posts.build(post_params)
     if @post.save
       redirect_to polymorphic_path(
-                    [post.postable.organization, post.postable, :posts],
+                    [@post.postable.organization, @post.postable, :posts],
                   ),
                   success: '登録しました'
     else
