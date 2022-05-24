@@ -3,6 +3,7 @@ class PostsController < ApplicationController
     @posts =
       @postable
         .posts
+        .with_attached_image
         .published
         .page(params[:page])
         .per(5)
@@ -11,6 +12,7 @@ class PostsController < ApplicationController
 
   def show
     @post = @postable.posts.published.find(params[:id])
-    @posts = @postable.posts.published.order(created_at: :desc)
+    @posts =
+      @postable.posts.with_attached_image.published.order(created_at: :desc)
   end
 end
