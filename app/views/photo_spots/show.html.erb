@@ -27,12 +27,63 @@
           </div>
         </div>
 
+        <!-- Listing Nav -->
+        <div id="listing-nav" class="listing-nav-container">
+          <ul class="listing-nav">
+            <li><a href="#listing-overview" class="active">概要</a></li>
+            <% unless @posts.size == 0 %>
+              <li><a href="#listing-reviews">NEWS</a></li>
+            <% end %>
+            <li><a href="#listing-location">地図</a></li>
+          </ul>
+        </div>
+
+        <!-- News -->
+        <% unless @posts.size == 0 %>
+        <div id="listing-reviews" class="listing-section">
+          <h3 class="listing-desc-headline margin-top-75 margin-bottom-20">NEWS</h3>
+
+          <div class="clearfix"></div>
+
+          <section class="comments listing-reviews">
+            <ul>
+              <%= render partial: "listing_partial/single_page_post", collection: @posts.three, as: 'post' %>
+            </ul>
+          </section>
+
+          <!-- Pagination -->
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12">
+                <!-- Pagination -->
+                <div class="pagination-container margin-top-30">
+                  <nav class="pagination">
+                    <%= link_to photo_spot_posts_path(@photo_spot) do %>
+                      NEWS一覧 <i class="sl sl-icon-arrow-right"></i>
+                    <% end %>
+                  </nav>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- Pagination / End -->
+
+        </div>
+        <% end %>
+
         <!-- Location -->
         <div id="listing-location" class="listing-section">
           <h3 class="listing-desc-headline margin-top-60 margin-bottom-30">地図</h3>
           <div id="map-location-display" class="margin-top-25 margin-bottom-25" data-lat="<%= @photo_spot.lat %>" data-lng="<%= @photo_spot.lng %>"></div>
         </div>
 
+
+      </div>
+
+      <!-- Sidebar
+  ================================================== -->
+      <div class="col-lg-4 col-md-4 margin-top-75 sticky">
+      
         <% if current_user %>
           <div class="listing-share margin-top-40 margin-bottom-40 no-border" id="bookmark-area">
             <% if current_user.bookmark?(@photo_spot) %>
@@ -42,12 +93,6 @@
             <% end %>
           </div>
         <% end %>
-
-      </div>
-
-      <!-- Sidebar
-  ================================================== -->
-      <div class="col-lg-4 col-md-4 margin-top-75 sticky">
 
       </div>
       <!-- Sidebar / End -->

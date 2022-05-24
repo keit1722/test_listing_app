@@ -1,10 +1,11 @@
 class Mypage::BookmarksController < Mypage::BaseController
   def index
     @bookmarks =
-      Bookmark
+      current_user
+        .bookmarks
         .includes([:bookmarkable])
         .page(params[:page])
-        .per(5)
+        .per(20)
         .order(created_at: :desc)
   end
 end

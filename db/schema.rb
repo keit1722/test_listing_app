@@ -154,6 +154,17 @@ ActiveRecord::Schema.define(version: 2022_05_19_041819) do
     t.index ["slug"], name: "index_photo_spots_on_slug", unique: true
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.bigint "postable_id"
+    t.string "postable_type"
+    t.string "title", null: false
+    t.text "body", null: false
+    t.integer "status", default: 1, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
+  end
+
   create_table "restaurant_categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "updated_at", precision: 6, null: false

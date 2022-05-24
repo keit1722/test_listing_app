@@ -35,6 +35,7 @@ class Shop < ApplicationRecord
   has_many :shop_categories, through: :shop_category_mappings
   has_many :bookmarks, as: :bookmarkable, dependent: :destroy
   has_many :users, through: :bookmarks
+  has_many :posts, as: :postable
 
   validates :name, length: { maximum: 100 }, uniqueness: true, presence: true
   validates :address, length: { maximum: 100 }, presence: true
