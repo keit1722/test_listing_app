@@ -4,14 +4,15 @@ class ShopsController < ApplicationController
   def index
     @shops =
       Shop
-      .with_attached_images
-      .includes(:shop_categories)
-      .page(params[:page])
-      .per(20)
-      .order(created_at: :desc)
+        .with_attached_images
+        .includes(:shop_categories)
+        .page(params[:page])
+        .per(20)
+        .order(created_at: :desc)
   end
 
   def show
     @shop = Shop.with_attached_images.find_by(slug: params[:slug])
+    @posts = @shop.posts.published.with_attached_image.order(created_at: :desc)
   end
 end
