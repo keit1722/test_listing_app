@@ -11,4 +11,8 @@ class PostDecorator < ApplicationDecorator
       ActionController::Base.helpers.tag(:br),
     )
   end
+
+  def format_created_at
+    object.created_at.strftime('%Y/%m/%d')
+  end
 end
