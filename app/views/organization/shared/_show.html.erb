@@ -1,0 +1,47 @@
+<%= render 'shared/breadcrumbs_mypage', { title: title } %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div id="add-listing">
+
+        <!-- Section -->
+        <div class="add-listing-section margin-top-45">
+
+          <!-- Headline -->
+          <div class="add-listing-headline">
+            <h3><%= post.title %></h3> 
+            <% if post.draft? %>
+              <span>下書き</span>
+            <% end%>
+          </div>
+
+          <!-- Description -->
+          <div class="form">
+            <%= @post.decorate.format_body %>
+          </div>
+
+          <!-- Row -->
+          <% if post.image.attached? %>
+            <div class="row with-forms margin-bottom-20 margin-top-30">
+              <!-- Images preview -->
+              <div class="col-md-12">
+                <%= image_tag post.image.variant(resize: '300x200').processed %>
+              </div>
+            </div>
+          <% end %>
+          <!-- Row / End -->
+
+        </div>
+        <!-- Section / End -->
+
+          <div class="margin-top-30">
+            <%= link_to edit_polymorphic_path([post.postable.organization, post.postable, post]), class: "button" do %>
+              <i class="sl sl-icon-pencil"></i> 編集
+            <% end%>
+            <%= link_to polymorphic_path([post.postable.organization, post.postable, post]), method: :delete, data: { confirm: "投稿を削除すると復旧はできません。よろしいですか？" }, class: "button" do %>
+              <i class="sl sl-icon-trash"></i> 削除
+            <% end %>
+          </div>
+
+    </div>
+  </div>

@@ -16,9 +16,8 @@ class Organization::PostsController < ApplicationController
   def create
     @post = @postable.posts.build(post_params)
     if @post.save
-      redirect_to organization_restaurant_posts_path(
-                    @post.postable.organization,
-                    @post.postable,
+      redirect_to polymorphic_path(
+                    [post.postable.organization, post.postable, :posts],
                   ),
                   success: '登録しました'
     else
@@ -34,10 +33,8 @@ class Organization::PostsController < ApplicationController
   def update
     @post = @postable.posts.find(params[:id])
     if @post.update(post_params)
-      redirect_to organization_restaurant_post_path(
-                    @post.postable.organization,
-                    @post.postable,
-                    @post,
+      redirect_to polymorphic_path(
+                    [@post.postable.organization, @post.postable, @post],
                   ),
                   success: '投稿を更新しました'
     else
@@ -48,6 +45,15 @@ class Organization::PostsController < ApplicationController
 
   def show
     @post = @postable.posts.find(params[:id])
+  end
+
+  def destroy
+    @post = @postable.posts.find(params[:id])
+    @post.destroy!
+    redirect_to polymorphic_path(
+                  [@post.postable.organization, @post.postable, :posts],
+                ),
+                success: '削除しました'
   end
 
   private
