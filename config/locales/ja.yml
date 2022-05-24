@@ -79,3 +79,8 @@ ja:
         description: スキー場の紹介
         images: 画像
   attributes:
+  enums:
+    post:
+      status:
+        published: "投稿する"
+        draft: "下書にする"
